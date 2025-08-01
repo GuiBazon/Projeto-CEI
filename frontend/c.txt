@@ -1,0 +1,5 @@
+Protótipo no Figma + página de login (HTML/CSS).
+
+Interface de cadastro (pré e pós-login), página home, redirecionamento por links.
+
+Telas de registro e visualização de ocorrências.

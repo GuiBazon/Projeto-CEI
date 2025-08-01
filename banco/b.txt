@@ -1,0 +1,5 @@
+MER e DER + estrutura inicial.
+
+Banco de dados físico + queries de Usuários e Alunos.
+
+Queries de Ocorrências com Function e Procedure.

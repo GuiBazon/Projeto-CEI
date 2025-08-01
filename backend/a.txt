@@ -1,0 +1,5 @@
+Configuração da API (index, server, routes).
+
+Controllers de Usuários e Alunos com CRUD.
+
+Controller de Ocorrências com CRUD.
