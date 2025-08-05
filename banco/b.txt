@@ -1,0 +1,8 @@
+sprint 1
+Criação dos modelos de dados (MER e DER) e estrutura inicial do banco.
+
+sprint 2
+Implementação física completa do banco de dados e desenvolvimento das queries da controller de Usuários e Alunos.
+
+sprint 3
+Desenvolvimento das queries da controller de Ocorrências utilizando Function e Procedure.

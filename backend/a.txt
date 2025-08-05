@@ -1,0 +1,8 @@
+sprint 1
+Construção e configuração da API (index, server e routes).
+
+sprint 2
+Implementação das controllers de Aluno e Usuários com rotas para CRUD (Create, Read, Update, Delete)
+
+sprint 3
+Implementação da controller de Ocorrências com rotas para CRUD (Create, Read, Update, Delete).
