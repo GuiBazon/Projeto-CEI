@@ -29,21 +29,21 @@ Permitir que membros da equipe escolar possam registrar e consultar ocorrências
 ## 🧩 Organização por Sprint
 
 **Sprint 1**  
-- *Guilherme Bazon* → LIMA  
-- *Pedro* → Back-End  
-- *Kauan* → Banco de Dados  
+- *Guilherme Bazon* → Back-End 
+- *Pedro* → Banco de Dados
+- *Kauan* → LIMA 
 > Foco: montar layout, começar estrutura funcional e criar banco com turma 1C DS
 
 **Sprint 2**  
-- *Guilherme Bazon* → Banco de Dados  
-- *Pedro* → LIMA  
-- *Kauan* → Back-End  
+- *Guilherme Bazon* → LIMA
+- *Pedro* → Back-End
+- *Kauan* → Banco de Dados
 > Foco: adicionar mais turmas e conectar front com back
 
 **Sprint 3**  
-- *Guilherme Bazon* → Back-End  
+- *Guilherme Bazon* → LIMA
 - *Pedro* → Banco de Dados  
-- *Kauan* → LIMA  
+- *Kauan* → Back-End
 > Foco: sistema finalizado, testes, ajustes e apresentação
 
 ---
