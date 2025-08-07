@@ -29,21 +29,21 @@ Permitir que membros da equipe escolar possam registrar e consultar ocorrências
 ## 🧩 Organização por Sprint
 
 **Sprint 1**  
-- *Guilherme Bazon* → Back-End 
+- *Bazon* → Back-End 
 - *Pedro* → Banco de Dados
 - *Kauan* → LIMA 
 > Foco: montar layout, começar estrutura funcional e criar banco com turma 1C DS
 
 **Sprint 2**  
-- *Guilherme Bazon* → LIMA
-- *Pedro* → Back-End
-- *Kauan* → Banco de Dados
+- *Bazon* → Banco de Dados
+- *Pedro* → LIMA
+- *Kauan* → Back-End
 > Foco: adicionar mais turmas e conectar front com back
 
 **Sprint 3**  
-- *Guilherme Bazon* → LIMA
-- *Pedro* → Banco de Dados  
-- *Kauan* → Back-End
+- *Bazon* → LIMA
+- *Pedro* → Back-End 
+- *Kauan* → Banco de Dados
 > Foco: sistema finalizado, testes, ajustes e apresentação
 
 ---
@@ -56,7 +56,7 @@ Permitir que membros da equipe escolar possam registrar e consultar ocorrências
 
 ## 🗂️ Trello do Projeto
 
-[]
+[Eu nao sei por link só pra visualização KKKK]
 
 ---
 

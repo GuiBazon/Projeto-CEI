@@ -1,10 +1,16 @@
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
-const routes = require('./routes/alunoRoutes');
+const port = 3000;
 
+app.use(cors());
 app.use(express.json());
-app.use('/api', routes);
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.get('/', (req, res) => {
+  res.send('API funcionando!');
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
