@@ -54,18 +54,8 @@ Permitir que membros da equipe escolar possam registrar e consultar ocorrências
 
 ---
 
-## 🗂️ Trello do Projeto
-
-[Eu nao sei por link só pra visualização KKKK]
-
----
-
 ## 📝 Observações
 
-- Nome dos professores **Adriano Donisete Cassiano, Euller Da Silva Ferreira**
-- Projeto segue as diretrizes da disciplina PSOF
+- Professores: Adriano Donisete Cassiano e Euller Da Silva Ferreira
 
--=
-
-- Base inicial com a turma **1C DS (Senai)**
-- Sistema será expandido para outras turmas nas próximas sprints
+- Base inicial: Turma 1C DS (Senai), expansão prevista para outras turmas nas próximas sprints
