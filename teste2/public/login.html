@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Sistema Escolar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input id="usuario" type="text" placeholder="Usuário" required>
+      <input id="senha" type="password" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, senha })
+      });
+
+      const data = await resp.json();
+      if (data.success) {
+        // salvar user id no localStorage e ir pro dashboard
+        localStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = 'dashboard.html';
+      } else {
+        alert(data.mensagem || 'Erro no login');
+      }
+    });
+  </script>
+</body>
+</html>
