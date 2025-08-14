@@ -79,6 +79,18 @@ INSERT INTO alunos (nome, id_sala) VALUES
 ('Ulisses Santini Gomes', 1),
 ('Vinícius Soares Peroni', 1);
 
+
+
 -- usuário de teste: usuario = professor, senha = 1234
 INSERT INTO usuarios (usuario, senha, nome, papel) VALUES ('professor', '1234', 'Professor Teste', 'professor');
 
+
+
+INSERT INTO ocorrencias (id_aluno, id_tipo, data_ocorrencia)
+VALUES (
+  (SELECT id FROM alunos WHERE nome = 'Guilherme Bazon Garcia Neves'),
+  (SELECT id FROM tipos_ocorrencia WHERE nome = 'Celular'),
+  '2025-08-14'
+);
+
+SELECT * FROM ocorrencias;
