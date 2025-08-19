@@ -1,5 +1,5 @@
-CREATE DATABASE sprint2;
-USE sprint2;
+CREATE DATABASE sprint1;
+USE sprint1;
 
 
 
