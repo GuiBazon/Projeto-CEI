@@ -1,9 +1,0 @@
-
-sprint 1
-Protótipo do Sistema no Figma e criação da página de Login utilizando HTML/CSS.
-
-sprint 2
-Construção da interface estática de cadastro de Usuários (antes do login), implementação da página Home (pós-login) com redirecionamento por hiperlinks e interface de cadastro de Alunos (pós-home).
-
-sprint 3
-Criação das interfaces de registro e visualização de ocorrências por alunos.
