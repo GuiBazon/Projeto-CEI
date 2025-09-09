@@ -4,7 +4,7 @@ Este é um sistema web desenvolvido para registro e controle de ocorrências esc
 
 ---
 
-## 👥 Integrantes
+## Integrantes
 
 - Guilherme Bazon Garcia Neves 
 - Kauan Henrique Mello Silva 
@@ -12,7 +12,7 @@ Este é um sistema web desenvolvido para registro e controle de ocorrências esc
 
 ---
 
-## 📦 Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - HTML e CSS (LIMA)  
 - JavaScript (Back-End)  
@@ -20,13 +20,13 @@ Este é um sistema web desenvolvido para registro e controle de ocorrências esc
 
 ---
 
-## 🚀 Objetivo do Projeto
+## Objetivo do Projeto
 
 Permitir que membros da equipe escolar possam registrar e consultar ocorrências de alunos de forma simples e rápida, usando um sistema web conectado a um banco de dados.
 
 ---
 
-## 🧩 Organização por Sprint
+## Organização por Sprint
 
 **Sprint 1**  
 - *Bazon* → Back-End 
@@ -35,26 +35,28 @@ Permitir que membros da equipe escolar possam registrar e consultar ocorrências
 > Foco: montar layout, começar estrutura funcional e criar banco com turma 1C DS
 
 **Sprint 2**  
-- *Bazon* → Banco de Dados
-- *Pedro* → LIMA
-- *Kauan* → Back-End
+- *Bazon* → LIMA
+- *Pedro* → Back-End
+- *Kauan* → Banco de Dados
 > Foco: adicionar mais turmas e conectar front com back
 
 **Sprint 3**  
-- *Bazon* → LIMA
-- *Pedro* → Back-End 
-- *Kauan* → Banco de Dados
+- *Bazon* → Banco de Dados
+- *Pedro* → LIMA
+- *Kauan* → Back-End
 > Foco: sistema finalizado, testes, ajustes e apresentação
 
 ---
 
-## 📌 Status
+## Status
 
-🔧 Em desenvolvimento (Sprint 1)
+Em desenvolvimento (Sprint 2)
+
+Concluido (Sprint 1)
 
 ---
 
-## 📝 Observações
+## Observações
 
 - Professores: Adriano Donisete Cassiano e Euller Da Silva Ferreira
 
