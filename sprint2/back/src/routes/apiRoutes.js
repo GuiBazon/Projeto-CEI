@@ -1,19 +1,17 @@
 const router = require("express").Router();
-const userController = require("../controllers/usuarioController");
-const alunoController = require("../controllers/alunoController");
+const professorController = require('../controllers/professorController')
+const organizadorController = require('../controllers/organizadorController');
 
-// Rotas de Usuário
-router.post("/usuario", userController.createUser);
-router.get("/usuario", userController.readUsers);
-router.get("/usuario/:id", userController.getUserById);
-router.put("/usuario", userController.updateUser);
-router.delete("/usuario/:id", userController.deleteUser);
+router.post("/professor", professorController.createProfessor);
+router.put("/professor", professorController.updateProfessor);
+router.get("/professor", professorController.readProfessor);
+router.delete("/professor/:id", professorController.deleteProfessor);
+router.get("/professor/:id", professorController.getProfessorById);
 
-// Rotas de Aluno
-router.post("/aluno", alunoController.createAluno);
-router.get("/aluno", alunoController.getAllAluno);
-router.get("/aluno/:id", alunoController.getAlunoById);
-router.put("/aluno", alunoController.updateAluno);
-router.delete("/aluno/:id", alunoController.deleteAluno);
+router.post('/organizador', organizadorController.createOrganizador);
+router.get('/organizador', organizadorController.getAllOrganizadores);
+router.put('/organizador', organizadorController.updateOrganizador);
+router.delete('/organizador/:id', organizadorController.deleteOrganizador);
+router.get("/organizador/:id", professorController.getProfessorById);
 
 module.exports = router;

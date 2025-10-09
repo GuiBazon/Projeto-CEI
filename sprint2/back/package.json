@@ -4,13 +4,8 @@
   "description": "api do carometro escolar",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bazon, Kauan, Pedro",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+  "license": "ISC"
 }

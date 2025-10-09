@@ -1,12 +1,10 @@
-let alunos = [];
+let organizadores = [];
 let nextId = 1; // auto incremento
 
-module.exports = class alunoController {
-  // Criar um novo aluno
-  static async createAluno(req, res) {
+module.exports = class organizadorController {
+  static async createOrganizador(req, res) {
     const { nome, email, senha, telefone } = req.body;
 
-    // Validações básicas
     if (!nome || !email || !senha || !telefone) {
       return res
         .status(400)
@@ -19,82 +17,68 @@ module.exports = class alunoController {
       });
     }
 
-    // Verifica se já existe um aluno com o mesmo email
-    const existingAluno = alunos.find((alu) => alu.email === email);
-    if (existingAluno) {
+    // Verificando se o email já existe
+    const existingOrganizador = organizadores.find(
+      (org) => org.email === email
+    );
+    if (existingOrganizador) {
       return res.status(400).json({ error: "Email já cadastrado" });
     }
 
-    // Cria um novo objeto aluno
-    const newAluno = {
-      id_aluno: nextId++,
+    // Cria novo organizador
+    const newOrganizador = {
+      id_organizador: nextId++,
       nome,
       email,
       senha,
       telefone,
     };
 
-    // Adiciona na "lista"
-    alunos.push(newAluno);
+    organizadores.push(newOrganizador);
 
     return res.status(201).json({
-      message: "Aluno criado com sucesso",
-      aluno: newAluno,
+      message: "Organizador criado com sucesso",
+      organizador: newOrganizador,
     });
   }
 
-  // Listar todos os alunos
-  static async getAllAluno(req, res) {
+  static async getAllOrganizadores(req, res) {
     return res.status(200).json({
-      message: "Obtendo todos os alunos",
-      alunos,
+      message: "Obtendo todos os organizadores",
+      organizadores,
     });
   }
 
-  // Buscar um aluno por ID
-  static async getAlunoById(req, res) {
-    const alunoId = parseInt(req.params.id);
-
-    const aluno = alunos.find((alu) => alu.id_aluno === alunoId);
-
-    if (!aluno) {
-      return res.status(404).json({ error: "Aluno não encontrado" });
-    }
-
-    return res.status(200).json(aluno);
-  }
-
-  // Atualizar os dados de um aluno
-  static async updateAluno(req, res) {
-    const { id_aluno, nome, email, senha, telefone } = req.body;
+  static async updateOrganizador(req, res) {
+    const { id_organizador, nome, email, senha, telefone } = req.body;
 
     // Validações
-    if (!id_aluno || !nome || !email || !senha || !telefone) {
+    if (!id_organizador || !nome || !email || !senha || !telefone) {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Procura o índice do aluno no array
-    const alunoIndex = alunos.findIndex((alu) => alu.id_aluno === id_aluno);
+    const organizadorIndex = organizadores.findIndex(
+      (org) => org.id_organizador === id_organizador
+    );
 
-    if (alunoIndex === -1) {
-      return res.status(404).json({ error: "Aluno não encontrado" });
+    if (organizadorIndex === -1) {
+      return res.status(404).json({ error: "Organizador não encontrado" });
     }
 
-    // Verifica se o email já existe em outro aluno
-    const emailExists = alunos.some(
-      (alu) => alu.email === email && alu.id_aluno !== id_aluno
+    // Verificando se o email já está em uso por outro organizador
+    const emailExists = organizadores.some(
+      (org) => org.email === email && org.id_organizador !== id_organizador
     );
     if (emailExists) {
       return res
         .status(400)
-        .json({ error: "Email já cadastrado por outro aluno" });
+        .json({ error: "Email já cadastrado por outro organizador" });
     }
 
-    // Atualiza os dados do aluno
-    alunos[alunoIndex] = {
-      id_aluno,
+    organizadores[organizadorIndex] = {
+      id_organizador,
       nome,
       email,
       senha,
@@ -102,23 +86,26 @@ module.exports = class alunoController {
     };
 
     return res.status(200).json({
-      message: "Aluno atualizado com sucesso",
-      aluno: alunos[alunoIndex],
+      message: "Organizador atualizado com sucesso",
+      organizador: organizadores[organizadorIndex],
     });
   }
 
-  // Deletar aluno pelo ID
-  static async deleteAluno(req, res) {
-    const alunoId = parseInt(req.params.id);
+  static async deleteOrganizador(req, res) {
+    const organizadorId = parseInt(req.params.id);
 
-    const alunoIndex = alunos.findIndex((alu) => alu.id_aluno === alunoId);
+    const organizadorIndex = organizadores.findIndex(
+      (org) => org.id_organizador === organizadorId
+    );
 
-    if (alunoIndex === -1) {
-      return res.status(404).json({ error: "Aluno não encontrado" });
+    if (organizadorIndex === -1) {
+      return res.status(404).json({ error: "Organizador não encontrado" });
     }
 
-    alunos.splice(alunoIndex, 1);
+    organizadores.splice(organizadorIndex, 1);
 
-    return res.status(200).json({ message: "Aluno excluído com sucesso" });
+    return res
+      .status(200)
+      .json({ message: "Organizador excluído com sucesso" });
   }
 };
