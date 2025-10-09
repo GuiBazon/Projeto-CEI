@@ -1,10 +1,12 @@
 const express = require("express");
+const testConnect = require("./db/testConnect");
 
 class AppController {
   constructor() {
     this.express = express(); // cria uma intancia do express dentro da classe
     this.middlewares();
     this.routes();
+    testConnect();
   }
 
   // Permite que a aplicacao receba dados em formato JSON nas requires

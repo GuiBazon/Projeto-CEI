@@ -1,111 +1,91 @@
-let organizadores = [];
-let nextId = 1; // auto incremento
+const connect = require('../db/connect');
 
-module.exports = class organizadorController {
-  static async createOrganizador(req, res) {
-    const { nome, email, senha, telefone } = req.body;
+module.exports = class alunoController {
+  static async createAluno(req, res) {
+    const { id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    if (!nome || !email || !senha || !telefone) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
-    } else if (!email.includes("@")) {
-      return res.status(400).json({ error: "Email inválido. Deve conter @" });
-    } else if (telefone.length !== 11 || isNaN(telefone)) {
-      return res.status(400).json({
-        error: "Telefone inválido. Deve conter exatamente 11 dígitos numéricos",
-      });
+    if (!id_turma || !nome_aluno || !cpf || !data_nascimento) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos!" });
     }
 
-    // Verificando se o email já existe
-    const existingOrganizador = organizadores.find(
-      (org) => org.email === email
-    );
-    if (existingOrganizador) {
-      return res.status(400).json({ error: "Email já cadastrado" });
-    }
+    const query = `
+      INSERT INTO aluno (id_turma, nome_aluno, cpf, data_nascimento)
+      VALUES (?, ?, ?, ?)
+    `;
+    const values = [id_turma, nome_aluno, cpf, data_nascimento];
 
-    // Cria novo organizador
-    const newOrganizador = {
-      id_organizador: nextId++,
-      nome,
-      email,
-      senha,
-      telefone,
-    };
+    connect.query(query, values, function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro ao cadastrar aluno no banco" });
+      }
 
-    organizadores.push(newOrganizador);
-
-    return res.status(201).json({
-      message: "Organizador criado com sucesso",
-      organizador: newOrganizador,
+      console.log("Aluno inserido no MySQL");
+      return res.status(201).json({ message: "Aluno criado com sucesso!" });
     });
   }
 
-  static async getAllOrganizadores(req, res) {
-    return res.status(200).json({
-      message: "Obtendo todos os organizadores",
-      organizadores,
+  static async readAlunos(req, res) {
+    const query = `
+      SELECT a.*, t.nomeTurma, t.curso
+      FROM aluno a
+      LEFT JOIN turma t ON a.id_turma = t.id_turma
+    `;
+
+    connect.query(query, function (err, results) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+
+      return res.status(200).json({ message: "Obtendo alunos:", alunos: results });
     });
   }
 
-  static async updateOrganizador(req, res) {
-    const { id_organizador, nome, email, senha, telefone } = req.body;
+  static async updateAluno(req, res) {
+    const { id_aluno, id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    // Validações
-    if (!id_organizador || !nome || !email || !senha || !telefone) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+    if (!id_aluno || !id_turma || !nome_aluno || !cpf || !data_nascimento) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos!" });
     }
 
-    const organizadorIndex = organizadores.findIndex(
-      (org) => org.id_organizador === id_organizador
-    );
+    const query = `
+      UPDATE aluno
+      SET id_turma = ?, nome_aluno = ?, cpf = ?, data_nascimento = ?
+      WHERE id_aluno = ?
+    `;
+    const values = [id_turma, nome_aluno, cpf, data_nascimento, id_aluno];
 
-    if (organizadorIndex === -1) {
-      return res.status(404).json({ error: "Organizador não encontrado" });
-    }
+    connect.query(query, values, function (err, results) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
 
-    // Verificando se o email já está em uso por outro organizador
-    const emailExists = organizadores.some(
-      (org) => org.email === email && org.id_organizador !== id_organizador
-    );
-    if (emailExists) {
-      return res
-        .status(400)
-        .json({ error: "Email já cadastrado por outro organizador" });
-    }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Aluno não encontrado" });
+      }
 
-    organizadores[organizadorIndex] = {
-      id_organizador,
-      nome,
-      email,
-      senha,
-      telefone,
-    };
-
-    return res.status(200).json({
-      message: "Organizador atualizado com sucesso",
-      organizador: organizadores[organizadorIndex],
+      return res.status(200).json({ message: `Aluno atualizado com ID: ${id_aluno}` });
     });
   }
 
-  static async deleteOrganizador(req, res) {
-    const organizadorId = parseInt(req.params.id);
+  static async deleteAluno(req, res) {
+    const id = req.params.id_aluno;
 
-    const organizadorIndex = organizadores.findIndex(
-      (org) => org.id_organizador === organizadorId
-    );
+    const query = `DELETE FROM aluno WHERE id_aluno = ?`;
 
-    if (organizadorIndex === -1) {
-      return res.status(404).json({ error: "Organizador não encontrado" });
-    }
+    connect.query(query, [id], function (err, results) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
 
-    organizadores.splice(organizadorIndex, 1);
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Aluno não encontrado" });
+      }
 
-    return res
-      .status(200)
-      .json({ message: "Organizador excluído com sucesso" });
+      return res.status(200).json({ message: `Aluno excluído: ${id}` });
+    });
   }
 };
