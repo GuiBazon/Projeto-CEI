@@ -4,7 +4,7 @@ use cei;
 create table usuario (
   id_usuario int auto_increment primary key,
   nome_usuario varchar(100) not null,
-  email varchar(100) not null unique,
+  email varchar(100) unique not null,
   senha varchar(100) not null
 );
 
@@ -27,7 +27,6 @@ create table ocorrencia (
   id_ocorrencia int auto_increment primary key,
   fk_id_aluno int not null,
   fk_id_usuario int not null,
-  tipo_ocorrencia enum('celular', 'uniforme', 'comportamento', 'atraso', 'dormiu') not null,
   data_ocorrencia datetime not null,
   descricao varchar(100),
   foreign key (fk_id_aluno) references aluno(id_aluno),
@@ -77,7 +76,7 @@ insert into aluno (fk_id_turma, nome_aluno, cpf, data_nascimento) values
 (1, 'Vinicius Soares Peroni', '10000000030', '2008-01-01');
 
 -- populando tabela ocorrencia (exemplo)
-insert into ocorrencia (fk_id_aluno, fk_id_usuario, tipo_ocorrencia, data_ocorrencia, descricao) values
-(1, 1, 'uniforme', '2025-10-09 08:15:00', 'Aluno sem uniforme completo.'),
-(9, 2, 'comportamento', '2025-10-09 09:40:00', 'Conversando em sala.'),
-(26, 1, 'atraso', '2025-10-08 07:10:00', 'Chegou 10 minutos atrasado.');
+insert into ocorrencia (fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao) values
+(1, 1, '2025-10-09 08:15:00', 'Aluno sem uniforme completo.'),
+(9, 2, '2025-10-09 09:40:00', 'Conversando em sala.'),
+(26, 1, '2025-10-08 07:10:00', 'Chegou 10 minutos atrasado.');
