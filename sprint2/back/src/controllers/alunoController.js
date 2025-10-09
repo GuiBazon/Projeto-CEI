@@ -1,91 +1,116 @@
-const connect = require('../db/connect');
+// Importa a conexão com o banco de dados
+const connect = require("../db/connect");
 
 module.exports = class alunoController {
-  static async createAluno(req, res) {
-    const { id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    if (!id_turma || !nome_aluno || !cpf || !data_nascimento) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos!" });
+  // CREATE - Cadastrar novo aluno
+  static async createAluno(req, res) {
+    const { fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;
+
+    // Verifica se todos os campos foram preenchidos
+    if (!fk_id_turma || !nome_aluno || !cpf || !data_nascimento) {
+      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
     }
 
-    const query = `
-      INSERT INTO aluno (id_turma, nome_aluno, cpf, data_nascimento)
-      VALUES (?, ?, ?, ?)
-    `;
-    const values = [id_turma, nome_aluno, cpf, data_nascimento];
+    // Comando SQL de inserção
+    const query = "INSERT INTO aluno (fk_id_turma, nome_aluno, cpf, data_nascimento) VALUES (?, ?, ?, ?)";
 
-    connect.query(query, values, function (err) {
+    connect.query(query, [fk_id_turma, nome_aluno, cpf, data_nascimento], (err) => {
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: "Erro ao cadastrar aluno no banco" });
+        return res.status(500).json({ mensagem: "Erro ao cadastrar aluno." });
       }
 
-      console.log("Aluno inserido no MySQL");
-      return res.status(201).json({ message: "Aluno criado com sucesso!" });
+      return res.status(201).json({ mensagem: "Aluno cadastrado com sucesso!" });
     });
   }
 
-  static async readAlunos(req, res) {
+  // READ - Mostrar todos os alunos (com a turma)
+  static async readAllAluno(req, res) {
     const query = `
-      SELECT a.*, t.nomeTurma, t.curso
-      FROM aluno a
-      LEFT JOIN turma t ON a.id_turma = t.id_turma
+      SELECT aluno.*, turma.nome_turma 
+      FROM aluno
+      INNER JOIN turma ON aluno.fk_id_turma = turma.id_turma
     `;
 
-    connect.query(query, function (err, results) {
+    connect.query(query, (err, results) => {
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: "Erro interno do servidor" });
+        return res.status(500).json({ mensagem: "Erro ao buscar alunos." });
       }
 
-      return res.status(200).json({ message: "Obtendo alunos:", alunos: results });
+      return res.status(200).json(results);
     });
   }
 
+  // READ - Buscar aluno por ID
+  static async readAlunobyId(req, res) {
+    const id = req.params.id;
+    const query = `
+      SELECT aluno.*, turma.nome_turma 
+      FROM aluno
+      INNER JOIN turma ON aluno.fk_id_turma = turma.id_turma
+      WHERE aluno.id_aluno = ?
+    `;
+
+    connect.query(query, [id], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ mensagem: "Erro ao buscar aluno." });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({ mensagem: "Aluno não encontrado." });
+      }
+
+      return res.status(200).json(results[0]);
+    });
+  }
+
+  // UPDATE - Atualizar aluno
   static async updateAluno(req, res) {
-    const { id_aluno, id_turma, nome_aluno, cpf, data_nascimento } = req.body;
+    const { id_aluno, fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    if (!id_aluno || !id_turma || !nome_aluno || !cpf || !data_nascimento) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos!" });
+    if (!id_aluno || !fk_id_turma || !nome_aluno || !cpf || !data_nascimento) {
+      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
     }
 
     const query = `
       UPDATE aluno
-      SET id_turma = ?, nome_aluno = ?, cpf = ?, data_nascimento = ?
+      SET fk_id_turma = ?, nome_aluno = ?, cpf = ?, data_nascimento = ?
       WHERE id_aluno = ?
     `;
-    const values = [id_turma, nome_aluno, cpf, data_nascimento, id_aluno];
 
-    connect.query(query, values, function (err, results) {
+    connect.query(query, [fk_id_turma, nome_aluno, cpf, data_nascimento, id_aluno], (err, result) => {
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: "Erro interno do servidor" });
+        return res.status(500).json({ mensagem: "Erro ao atualizar aluno." });
       }
 
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: "Aluno não encontrado" });
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ mensagem: "Aluno não encontrado." });
       }
 
-      return res.status(200).json({ message: `Aluno atualizado com ID: ${id_aluno}` });
+      return res.status(200).json({ mensagem: "Aluno atualizado com sucesso!" });
     });
   }
 
+  // DELETE - Excluir aluno
   static async deleteAluno(req, res) {
-    const id = req.params.id_aluno;
+    const id = req.params.id;
+    const query = "DELETE FROM aluno WHERE id_aluno = ?";
 
-    const query = `DELETE FROM aluno WHERE id_aluno = ?`;
-
-    connect.query(query, [id], function (err, results) {
+    connect.query(query, [id], (err, result) => {
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: "Erro interno do servidor" });
+        return res.status(500).json({ mensagem: "Erro ao excluir aluno." });
       }
 
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: "Aluno não encontrado" });
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ mensagem: "Aluno não encontrado." });
       }
 
-      return res.status(200).json({ message: `Aluno excluído: ${id}` });
+      return res.status(200).json({ mensagem: "Aluno excluído com sucesso!" });
     });
   }
 };
