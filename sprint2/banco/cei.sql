@@ -37,8 +37,7 @@ create table ocorrencia (
 -- populando tabela usuario
 insert into usuario (nome_usuario, email, senha) values
 ('Adriano Donizete', 'adriano.donizete@docente.senai.com', 'dridrilegal123'),
-('Euller Ferreira', 'euller.ferreira@docente.senai.com', 'eu77ffgameplays'),
-('Pessoa Seria', 'pessoa.seria@coordenador.senai.com', 's3nh4f@rt3');
+('Euller Ferreira', 'euller.ferreira@docente.senai.com', 'eu77ffgameplays');
 
 -- populando tabela turma
 insert into turma (nome_turma, curso) values
@@ -80,6 +79,5 @@ insert into aluno (fk_id_turma, nome_aluno, cpf, data_nascimento) values
 -- populando tabela ocorrencia (exemplo)
 insert into ocorrencia (fk_id_aluno, fk_id_usuario, tipo_ocorrencia, data_ocorrencia, descricao) values
 (1, 1, 'uniforme', '2025-10-09 08:15:00', 'Aluno sem uniforme completo.'),
-(3, 2, 'comportamento', '2025-10-09 09:40:00', 'Conversando em sala.'),
-(5, 1, 'atraso', '2025-10-08 07:10:00', 'Chegou 10 minutos atrasado.'),
-(10, 3, 'celular', '2025-10-07 14:05:00', 'Usando celular durante a aula.');
+(9, 2, 'comportamento', '2025-10-09 09:40:00', 'Conversando em sala.'),
+(26, 1, 'atraso', '2025-10-08 07:10:00', 'Chegou 10 minutos atrasado.');
