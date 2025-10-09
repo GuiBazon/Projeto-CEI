@@ -17,7 +17,7 @@ class AppController {
   // Nos definimos as nossas rotas
   routes() {
     const apiRoutes = require("./routes/apiRoutes");
-    this.express.use("/api/v1", apiRoutes);
+    this.express.use("/api/v2", apiRoutes);
   }
 }
 
