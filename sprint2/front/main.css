@@ -1,25 +1,24 @@
 /*
 ==================================================
   Estilos Globais/Reset
-  Aplicados a todas as páginas para consistência
+  Seletor: body, input, textarea
 ==================================================
 */
 body {
-    /* Define a fonte padrão para todo o corpo da página */
+    /* Define a fonte padrão para o texto */
     font-family: Arial, sans-serif;
-    /* Remove as margens padrão do navegador */
+    /* Remove as margens externas padrão do navegador */
     margin: 0;
-    /* Remove o preenchimento padrão do navegador */
+    /* Remove o preenchimento interno padrão do navegador */
     padding: 0;
-    /* Garante que o corpo ocupe 100% da altura da viewport */
+    /* Garante que o corpo ocupe 100% da altura da tela */
     height: 100vh;
-    /* Define o modelo de caixa para incluir padding e borda na largura/altura */
+    /* Define o modelo de caixa para garantir que padding e borda sejam incluídos na largura/altura */
     box-sizing: border-box; 
 }
 
-/* Garante que inputs e textareas usem box-sizing consistentemente */
 input, textarea {
-    /* Define o modelo de caixa para inputs */
+    /* Aplica o modelo de caixa para inputs e textareas */
     box-sizing: border-box;
     /* Garante que a fonte seja herdada do body */
     font-family: inherit;
@@ -28,26 +27,28 @@ input, textarea {
 
 /*
 ==================================================
-  FOOTER PADRÃO (Aplicado a Home, Cadastro e Ocorrência)
+  FOOTER PADRÃO
+  Seletor: .footer-padrao
 ==================================================
 */
 .footer-padrao {
-    /* Posicionamento fixo na parte inferior */
+    /* Define o posicionamento fixo na tela */
     position: fixed;
+    /* Fixa o elemento na parte inferior da tela */
     bottom: 0;
-    /* Ocupa a largura total */
+    /* Ocupa a largura total da tela */
     width: 100%;
-    /* Cor de fundo escura */
+    /* Define a cor de fundo do rodapé */
     background-color: #1a1a4a;
-    /* Cor do texto branca */
+    /* Define a cor do texto como branco */
     color: white;
-    /* Alinhamento central */
+    /* Centraliza o texto */
     text-align: center;
-    /* Espaçamento interno */
+    /* Adiciona preenchimento interno vertical */
     padding: 5px 0;
-    /* Tamanho da fonte pequeno */
+    /* Define um tamanho de fonte pequeno */
     font-size: 12px;
-    /* Garante que fique acima de outros elementos se necessário */
+    /* Garante que o footer fique na camada superior */
     z-index: 100;
 }
 
@@ -59,15 +60,15 @@ input, textarea {
 ==================================================
 */
 .page-login {
-    /* Aplica um gradiente de fundo vertical (de baixo para cima) */
+    /* Aplica um gradiente de fundo */
     background: linear-gradient(to top,#0A002D, #200093);
-    /* Usa Flexbox para alinhamento */
+    /* Usa Flexbox para o layout */
     display:flex;
     /* Centraliza os itens horizontalmente */
     justify-content: center;
     /* Centraliza os itens verticalmente */
     align-items: center;
-    /* Altera a direção dos itens para coluna (vertical) */
+    /* Organiza os itens em coluna (vertical) */
     flex-direction: column;
 }
 
@@ -82,7 +83,7 @@ input, textarea {
     text-align: center;
     /* Define a largura fixa da caixa */
     width: 300px;
-    /* Garante que a caixa fique sobre outros elementos se houver sobreposição */
+    /* Garante que a caixa fique sobre outros elementos */
     z-index: 1;
 }
 
@@ -100,14 +101,15 @@ input, textarea {
     margin: 10px 0;
     /* Borda cinza clara */
     border: 1px solid #ccc;
-    /* Arredondamento extremo para um formato "pílula" */
+    /* Arredondamento extremo para formato "pílula" */
     border-radius: 500px;
 }
 
-.login-box button {
-    /* Transforma o botão em um elemento de bloco */
+/* Estilo para o link "Acessar" (substitui o botão para redirecionamento sem JS) */
+.login-box .btn-acessar {
+    /* Transforma o link em um bloco */
     display: block;
-    /* Largura do botão (40% da caixa) */
+    /* Largura do link (40% da caixa) */
     width: 40%;
     /* Espaçamento interno */
     padding: 10px;
@@ -115,16 +117,20 @@ input, textarea {
     background-color: #007bff;
     /* Cor do texto branca */
     color: white;
-    /* Remove a borda padrão */
+    /* Remove a borda */
     border: none;
     /* Arredondamento dos cantos */
     border-radius: 7px;
     /* Altera o cursor para indicar que é clicável */
     cursor: pointer;
-    /* Centraliza o botão horizontalmente e adiciona margem superior */
+    /* Centraliza o link horizontalmente e adiciona margem superior */
     margin: 20px auto 0;
     /* Deixa o texto em negrito */
     font-weight: bold;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+    /* Centraliza o texto dentro do link */
+    text-align: center;
 }
 
 .login-box p a {
@@ -134,11 +140,11 @@ input, textarea {
     text-decoration: none;
     /* Margem superior para separar do botão */
     margin-top: 10px;
-    /* Transforma o link em bloco para ocupar a própria linha */
+    /* Transforma o link em bloco */
     display: block;
 }
 
-/* Footer específico para a página de login */
+/* Footer específico da página de login */
 .page-login footer {
     /* Cor do texto branca */
     color: white;
@@ -150,12 +156,14 @@ input, textarea {
     width: 100%;
     /* Tamanho de fonte pequeno */
     font-size: 12px;
-    /* POSICIONAMENTO FIXO NA BASE DA TELA */
+    /* Define o posicionamento fixo na base da tela */
     position: fixed; 
+    /* Fixa na parte inferior */
     bottom: 0;
-    /* Garante que o gradiente de fundo apareça (sem fundo opaco) */
+    /* Fundo transparente para não cobrir o gradiente principal */
     background-color: transparent; 
-    z-index: 1; /* Abaixo do footer padrão, mas acima do fundo */
+    /* Z-index baixo, mas acima do fundo */
+    z-index: 1;
 }
 
 
@@ -268,7 +276,7 @@ input, textarea {
     width: 90%;
     /* Altura do container */
     height: 90%;
-    /* Define posição para que elementos internos possam ser posicionados relativamente */
+    /* Define posição relativa para posicionamento interno */
     position: relative;
     /* Esconde conteúdo excedente */
     overflow: hidden;
@@ -283,14 +291,14 @@ input, textarea {
     background: #2a4066;
     /* Espaçamento interno */
     padding: 20px 10px;
-    /* Define posição */
+    /* Define posição relativa */
     position: relative;
 }
 
 .sidebar h3 {
     /* Cor do texto do título */
     color: #bbb;
-    /* Remove margem padrão e adiciona margem inferior */
+    /* Margem vertical */
     margin: 0 0 20px;
     /* Alinha o texto ao centro */
     text-align: center;
@@ -331,7 +339,7 @@ input, textarea {
     width: 80%;
     /* Espaçamento interno */
     padding: 20px;
-    /* Define posição */
+    /* Define posição relativa */
     position: relative;
     /* Gradiente de fundo para o conteúdo */
     background:linear-gradient(to top ,#200093, #0A002D);
@@ -341,21 +349,20 @@ input, textarea {
     flex-direction: column;
     /* Alinha os itens ao centro (horizontalmente) */
     align-items: center;
-    /* Distribui o espaço entre os itens (header, main-content e buttons) */
+    /* Distribui o espaço entre os itens */
     justify-content: space-between;
     /* Garante 100% da altura para o espaçamento funcionar */
     height: 100%;
 }
 
-/* Contêiner para a barra de busca e o novo botão */
 .header-home {
-    /* Usa flexbox para posicionar os itens lado a lado */
+    /* Usa flexbox para posicionar a barra de busca e o botão lado a lado */
     display: flex;
     /* Alinha os itens na ponta direita */
     justify-content: flex-end;
-    /* Garante que ocupe a largura total do .content */
+    /* Ocupa a largura total do .content */
     width: 100%;
-    /* Margem inferior para espaçar do conteúdo principal (circles) */
+    /* Margem inferior para espaçar do conteúdo principal */
     margin-bottom: 20px;
     /* Alinha os itens verticalmente */
     align-items: center;
@@ -363,7 +370,6 @@ input, textarea {
     gap: 20px;
 }
 
-/* Estilo da Barra de Busca dentro do .header-home */
 .search-bar {
     /* Cor de fundo da barra de busca */
     background: #666;
@@ -401,13 +407,12 @@ input, textarea {
     color: #bbb;
 }
 
-/* Botão de Cadastro na Home (canto superior direito) */
 .btn-cadastro-usuario {
     /* Cor de fundo roxo */
     background-color: #4b0082;
     /* Cor do texto branca */
     color: white;
-    /* Decoração de link removida (sublinhado) */
+    /* Decoração de link removida */
     text-decoration: none;
     /* Espaçamento interno */
     padding: 10px 15px;
@@ -428,23 +433,23 @@ input, textarea {
     background-color: #6a0dad;
 }
 
-/* CORREÇÃO: Contêiner para o conteúdo principal que precisa de rolagem (Círculos) */
 .main-content {
     /* Define que este elemento deve crescer (ocupar o espaço restante) */
     flex-grow: 1;
-    /* Habilita a rolagem vertical, se o conteúdo exceder */
+    /* Habilita a rolagem vertical, se o conteúdo exceder (Corrige botões cortados) */
     overflow-y: auto; 
-    /* Garante que ocupe a largura total para centralizar a grid */
+    /* Garante que ocupe a largura total */
     width: 100%;
     /* Espaçamento interno */
     padding: 10px 0;
     /* Usa flexbox para centralizar os círculos */
     display: flex;
+    /* Centraliza horizontalmente */
     justify-content: center;
-    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    /* Alinha o conteúdo ao topo */
+    align-items: flex-start;
 }
 
-/* ATUALIZAÇÃO: Estilo da Grid de Círculos */
 .circles {
     /* Usa CSS Grid para o layout dos círculos */
     display: grid;
@@ -454,10 +459,9 @@ input, textarea {
     grid-template-rows: repeat(2, 120px);
     /* Espaçamento entre as células da grid */
     gap: 60px;
-    /* Centraliza a grid horizontalmente */
-    justify-content: center;
     /* Remove margens extras */
     margin: 0;
+    /* Adiciona preenchimento interno */
     padding: 10px;
 }
 
@@ -497,7 +501,7 @@ input, textarea {
     gap: 20px;
     /* Margem superior para separar do conteúdo rolável */
     margin-top: 20px; 
-    /* Margem inferior para afastar do final do container */
+    /* Margem inferior */
     margin-bottom: 5px; 
 }
 
