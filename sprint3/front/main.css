@@ -1,0 +1,666 @@
+/*
+==================================================
+  Estilos Globais/Reset
+  Seletor: body, input, textarea
+==================================================
+*/
+body {
+    /* Define a fonte padrão para o texto */
+    font-family: Arial, sans-serif;
+    /* Remove as margens externas padrão do navegador */
+    margin: 0;
+    /* Remove o preenchimento interno padrão do navegador */
+    padding: 0;
+    /* Garante que o corpo ocupe 100% da altura da tela */
+    height: 100vh;
+    /* Define o modelo de caixa para garantir que padding e borda sejam incluídos na largura/altura */
+    box-sizing: border-box; 
+}
+
+input, textarea {
+    /* Aplica o modelo de caixa para inputs e textareas */
+    box-sizing: border-box;
+    /* Garante que a fonte seja herdada do body */
+    font-family: inherit;
+}
+
+
+/*
+==================================================
+  FOOTER PADRÃO
+  Seletor: .footer-padrao
+==================================================
+*/
+.footer-padrao {
+    /* Define o posicionamento fixo na tela */
+    position: fixed;
+    /* Fixa o elemento na parte inferior da tela */
+    bottom: 0;
+    /* Ocupa a largura total da tela */
+    width: 100%;
+    /* Define a cor de fundo do rodapé */
+    background-color: #1a1a4a;
+    /* Define a cor do texto como branco */
+    color: white;
+    /* Centraliza o texto */
+    text-align: center;
+    /* Adiciona preenchimento interno vertical */
+    padding: 5px 0;
+    /* Define um tamanho de fonte pequeno */
+    font-size: 12px;
+    /* Garante que o footer fique na camada superior */
+    z-index: 100;
+}
+
+
+/*
+==================================================
+  PÁGINA DE LOGIN (login.html)
+  Seletor de Escopo: .page-login
+==================================================
+*/
+.page-login {
+    /* Aplica um gradiente de fundo */
+    background: linear-gradient(to top,#0A002D, #200093);
+    /* Usa Flexbox para o layout */
+    display:flex;
+    /* Centraliza os itens horizontalmente */
+    justify-content: center;
+    /* Centraliza os itens verticalmente */
+    align-items: center;
+    /* Organiza os itens em coluna (vertical) */
+    flex-direction: column;
+}
+
+.login-box {
+    /* Cor de fundo da caixa de login */
+    background-color: #f0f0f0;
+    /* Espaçamento interno da caixa */
+    padding: 40px;
+    /* Arredondamento dos cantos */
+    border-radius: 10px;
+    /* Alinhamento do texto ao centro */
+    text-align: center;
+    /* Define a largura fixa da caixa */
+    width: 300px;
+    /* Garante que a caixa fique sobre outros elementos */
+    z-index: 1;
+}
+
+.login-box h2 {
+    /* Margem inferior do título */
+    margin-bottom: 19px;
+}
+
+.login-box input {
+    /* Largura total dentro do box */
+    width: 100%;
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Margem vertical para separar os inputs */
+    margin: 10px 0;
+    /* Borda cinza clara */
+    border: 1px solid #ccc;
+    /* Arredondamento extremo para formato "pílula" */
+    border-radius: 500px;
+}
+
+/* Estilo para o link "Acessar" (substitui o botão para redirecionamento sem JS) */
+.login-box .btn-acessar {
+    /* Transforma o link em um bloco */
+    display: block;
+    /* Largura do link (40% da caixa) */
+    width: 40%;
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Cor de fundo azul */
+    background-color: #007bff;
+    /* Cor do texto branca */
+    color: white;
+    /* Remove a borda */
+    border: none;
+    /* Arredondamento dos cantos */
+    border-radius: 7px;
+    /* Altera o cursor para indicar que é clicável */
+    cursor: pointer;
+    /* Centraliza o link horizontalmente e adiciona margem superior */
+    margin: 20px auto 0;
+    /* Deixa o texto em negrito */
+    font-weight: bold;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+    /* Centraliza o texto dentro do link */
+    text-align: center;
+}
+
+.login-box p a {
+    /* Cor do link azul */
+    color: #007bff;
+    /* Remove o sublinhado */
+    text-decoration: none;
+    /* Margem superior para separar do botão */
+    margin-top: 10px;
+    /* Transforma o link em bloco */
+    display: block;
+}
+
+/* Footer específico da página de login */
+.page-login footer {
+    /* Cor do texto branca */
+    color: white;
+    /* Margem superior para separar da caixa de login */
+    margin-top: 20px;
+    /* Alinhamento do texto ao centro */
+    text-align: center;
+    /* Ocupa a largura total da página */
+    width: 100%;
+    /* Tamanho de fonte pequeno */
+    font-size: 12px;
+    /* Define o posicionamento fixo na base da tela */
+    position: fixed; 
+    /* Fixa na parte inferior */
+    bottom: 0;
+    /* Fundo transparente para não cobrir o gradiente principal */
+    background-color: transparent; 
+    /* Z-index baixo, mas acima do fundo */
+    z-index: 1;
+}
+
+
+/*
+==================================================
+  PÁGINA DE CADASTRO (cadastro.html)
+  Seletor de Escopo: .page-cadastro
+==================================================
+*/
+.page-cadastro {
+    /* Gradiente de fundo */
+    background: linear-gradient(to top , #0A002D, #200093);
+    /* Usa Flexbox */
+    display: flex;
+    /* Centraliza horizontalmente */
+    justify-content: center;
+    /* Centraliza verticalmente */
+    align-items: center;
+}
+
+.page-cadastro .container {
+    /* Cor de fundo do container cinza claro */
+    background: #d3d3d3;
+    /* Espaçamento interno */
+    padding: 20px;
+    /* Arredondamento dos cantos */
+    border-radius: 15px;
+    /* Alinhamento do texto */
+    text-align: center;
+    /* Largura do container */
+    width: 300px;
+}
+
+.page-cadastro h2 {
+    /* Margem inferior do título */
+    margin-bottom: 20px;
+    /* Cor do texto */
+    color: #333;
+}
+
+.page-cadastro input {
+    /* Ocupa a própria linha */
+    display: block;
+    /* 90% da largura do container */
+    width: 90%;
+    /* Margem vertical e centralização horizontal */
+    margin: 15px auto;
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Borda sutil */
+    border: 1px solid #ccc;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Cor de fundo do campo de input */
+    background: #f9f9f9;
+}
+
+.page-cadastro button {
+    /* 90% da largura do container */
+    width: 90%;
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Cor de fundo roxo */
+    background-color: #4b0082;
+    /* Cor do texto branca */
+    color: white;
+    /* Remove a borda */
+    border: none;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Cursor clicável */
+    cursor: pointer;
+    /* Texto em negrito */
+    font-weight: bold;
+}
+
+.page-cadastro button:hover {
+    /* Efeito de hover: cor de fundo mais clara */
+    background-color: #6a0dad;
+}
+
+
+/*
+==================================================
+  PÁGINA HOME (home.html)
+  Seletor de Escopo: .page-home
+==================================================
+*/
+.page-home {
+    /* Cor de fundo principal */
+    background: #1a1a4a;
+    /* Usa Flexbox */
+    display: flex;
+    /* Centraliza horizontalmente */
+    justify-content: center;
+    /* Centraliza verticalmente */
+    align-items: center;
+    /* Esconde qualquer conteúdo que exceda a área do body */
+    overflow: hidden;
+    /* Cor de texto padrão para a Home */
+    color: #fff;
+    /* Adiciona padding na parte inferior para o footer fixo não cobrir o conteúdo */
+    padding-bottom: 30px; 
+}
+
+.page-home .container {
+    /* Cor de fundo do container principal */
+    background: #2a2a72;
+    /* Largura do container */
+    width: 90%;
+    /* Altura do container */
+    height: 90%;
+    /* Define posição relativa para posicionamento interno */
+    position: relative;
+    /* Esconde conteúdo excedente */
+    overflow: hidden;
+    /* Usa Flexbox para o layout lateral (sidebar e content) */
+    display: flex;
+}
+
+.sidebar {
+    /* Largura da barra lateral (20% do container) */
+    width: 20%;
+    /* Cor de fundo da barra lateral */
+    background: #2a4066;
+    /* Espaçamento interno */
+    padding: 20px 10px;
+    /* Define posição relativa */
+    position: relative;
+}
+
+.sidebar h3 {
+    /* Cor do texto do título */
+    color: #bbb;
+    /* Margem vertical */
+    margin: 0 0 20px;
+    /* Alinha o texto ao centro */
+    text-align: center;
+    /* Tamanho da fonte */
+    font-size: 16px;
+    /* Transforma o texto em maiúsculas */
+    text-transform: uppercase;
+}
+
+.sidebar ul {
+    /* Remove os marcadores de lista */
+    list-style: none;
+    /* Remove o preenchimento padrão da lista */
+    padding: 0;
+}
+
+.sidebar ul li {
+    /* Cor de fundo dos itens da lista */
+    background: #3a4a6a;
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Margem inferior para espaçamento entre itens */
+    margin-bottom: 10px;
+    /* Cor do texto */
+    color: #ddd;
+    /* Arredondamento dos cantos */
+    border-radius: 3px;
+    /* Alinha o texto ao centro */
+    text-align: center;
+    /* Tamanho da fonte */
+    font-size: 14px;
+    /* Transforma o texto em maiúsculas */
+    text-transform: uppercase;
+}
+
+.content {
+    /* Largura do conteúdo principal (80% do container) */
+    width: 80%;
+    /* Espaçamento interno */
+    padding: 20px;
+    /* Define posição relativa */
+    position: relative;
+    /* Gradiente de fundo para o conteúdo */
+    background:linear-gradient(to top ,#200093, #0A002D);
+    /* Usa Flexbox para organizar o conteúdo verticalmente */
+    display: flex;
+    /* Organiza os itens em coluna */
+    flex-direction: column;
+    /* Alinha os itens ao centro (horizontalmente) */
+    align-items: center;
+    /* Distribui o espaço entre os itens */
+    justify-content: space-between;
+    /* Garante 100% da altura para o espaçamento funcionar */
+    height: 100%;
+}
+
+.header-home {
+    /* Usa flexbox para posicionar a barra de busca e o botão lado a lado */
+    display: flex;
+    /* Alinha os itens na ponta direita */
+    justify-content: flex-end;
+    /* Ocupa a largura total do .content */
+    width: 100%;
+    /* Margem inferior para espaçar do conteúdo principal */
+    margin-bottom: 20px;
+    /* Alinha os itens verticalmente */
+    align-items: center;
+    /* Espaçamento entre os itens */
+    gap: 20px;
+}
+
+.search-bar {
+    /* Cor de fundo da barra de busca */
+    background: #666;
+    /* Espaçamento interno */
+    padding: 5px 10px;
+    /* Arredondamento dos cantos */
+    border-radius: 3px;
+    /* Alinhamento do texto */
+    text-align: center;
+    /* Largura da barra de busca */
+    width: 300px;
+}
+
+.search-bar input {
+    /* Fundo transparente */
+    background: transparent;
+    /* Sem borda */
+    border: none;
+    /* Espaçamento interno */
+    padding: 6px;
+    /* Cor do texto branca */
+    color: #fff;
+    /* Largura total */
+    width: 100%;
+    /* Tamanho da fonte */
+    font-size: 14px;
+    /* Alinhamento do texto */
+    text-align: center;
+    /* Remove o contorno ao focar */
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    /* Cor do texto do placeholder */
+    color: #bbb;
+}
+
+.btn-cadastro-usuario {
+    /* Cor de fundo roxo */
+    background-color: #4b0082;
+    /* Cor do texto branca */
+    color: white;
+    /* Decoração de link removida */
+    text-decoration: none;
+    /* Espaçamento interno */
+    padding: 10px 15px;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Texto em negrito */
+    font-weight: bold;
+    /* Transforma o link em bloco para aceitar padding */
+    display: inline-block;
+    /* Tamanho da fonte */
+    font-size: 14px;
+    /* Alinha o texto ao centro */
+    text-align: center;
+}
+
+.btn-cadastro-usuario:hover {
+    /* Efeito de hover: cor de fundo mais clara */
+    background-color: #6a0dad;
+}
+
+.main-content {
+    /* Define que este elemento deve crescer (ocupar o espaço restante) */
+    flex-grow: 1;
+    /* Habilita a rolagem vertical, se o conteúdo exceder (Corrige botões cortados) */
+    overflow-y: auto; 
+    /* Garante que ocupe a largura total */
+    width: 100%;
+    /* Espaçamento interno */
+    padding: 10px 0;
+    /* Usa flexbox para centralizar os círculos */
+    display: flex;
+    /* Centraliza horizontalmente */
+    justify-content: center;
+    /* Alinha o conteúdo ao topo */
+    align-items: flex-start;
+}
+
+.circles {
+    /* Usa CSS Grid para o layout dos círculos */
+    display: grid;
+    /* Define 4 colunas de 100px cada */
+    grid-template-columns: repeat(4, 100px);
+    /* Define 2 linhas de 120px cada */
+    grid-template-rows: repeat(2, 120px);
+    /* Espaçamento entre as células da grid */
+    gap: 60px;
+    /* Remove margens extras */
+    margin: 0;
+    /* Adiciona preenchimento interno */
+    padding: 10px;
+}
+
+.circle-item {
+    /* Usa Flexbox para alinhamento vertical dentro do item */
+    display: flex;
+    /* Organiza em coluna */
+    flex-direction: column;
+    /* Centraliza horizontalmente */
+    align-items: center;
+}
+
+.circle {
+    /* Largura do círculo */
+    width: 100px;
+    /* Altura do círculo */
+    height: 100px;
+    /* Cor de fundo branca */
+    background: #fff;
+    /* Arredondamento para criar um círculo perfeito */
+    border-radius: 50%;
+    /* Margem inferior */
+    margin-bottom: 5px;
+}
+
+.circle-item span {
+    /* Cor do texto do nome */
+    color: #fff;
+    /* Tamanho da fonte */
+    font-size: 12px;
+}
+
+.buttons {
+    /* Usa Flexbox para os botões inferiores */
+    display: flex;
+    /* Espaçamento entre os botões */
+    gap: 20px;
+    /* Margem superior para separar do conteúdo rolável */
+    margin-top: 20px; 
+    /* Margem inferior */
+    margin-bottom: 5px; 
+}
+
+.buttons button {
+    /* Espaçamento interno */
+    padding: 10px 20px;
+    /* Cor de fundo azul */
+    background-color: #007bff;
+    /* Cor do texto branca */
+    color: white;
+    /* Remove a borda */
+    border: none;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Cursor clicável */
+    cursor: pointer;
+    /* Texto em negrito */
+    font-weight: bold;
+    /* Transforma o texto em maiúsculas */
+    text-transform: uppercase;
+}
+
+.buttons button:hover {
+    /* Efeito de hover: cor de fundo mais escura */
+    background-color: #0056b3;
+}
+
+
+/*
+==================================================
+  PÁGINA DE OCORRÊNCIA (ocorrencia.html)
+  Seletor de Escopo: .page-ocorrencia
+==================================================
+*/
+.page-ocorrencia {
+    /* Gradiente de fundo */
+    background: linear-gradient(to top, #200093, #0A002D);
+    /* Cor de texto padrão branca */
+    color: #fff;
+    /* Usa Flexbox */
+    display: flex;
+    /* Centraliza horizontalmente */
+    justify-content: center;
+    /* Centraliza verticalmente */
+    align-items: center;
+    /* Preenchimento geral da página */
+    padding: 20px;
+    /* Adiciona padding na parte inferior para o footer fixo não cobrir o conteúdo */
+    padding-bottom: 30px; 
+}
+
+.page-ocorrencia .container {
+    /* Cor de fundo do container cinza */
+    background-color: #d3c9c9;
+    /* Espaçamento interno */
+    padding: 30px;
+    /* Arredondamento dos cantos */
+    border-radius: 15px;
+    /* Largura do container */
+    width: 500px;
+    /* Alinhamento do texto */
+    text-align: center;
+    /* Sombra ao redor do container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.page-ocorrencia .circle {
+    /* Largura do círculo */
+    width: 100px;
+    /* Altura do círculo */
+    height: 100px;
+    /* Cor de fundo branca */
+    background-color: #fff;
+    /* Arredondamento para círculo */
+    border-radius: 50%;
+    /* Centraliza horizontalmente e adiciona margem inferior */
+    margin: 0 auto 10px;
+}
+
+.page-ocorrencia p {
+    /* Cor do texto preta (sobre o fundo cinza) */
+    color: #000;
+    /* Margem inferior */
+    margin-bottom: 5px;
+}
+
+.page-ocorrencia h1 {
+    /* Tamanho da fonte do título */
+    font-size: 26px;
+    /* Margem inferior para espaçamento */
+    margin-bottom: 35px;
+    /* Cor do título preta */
+    color: #000;
+}
+
+.form-group {
+    /* Margem inferior */
+    margin-bottom: 25px;
+    /* Usa Flexbox para alinhar label e input */
+    display: flex;
+    /* Centraliza o grupo horizontalmente */
+    justify-content: center;
+    /* Centraliza verticalmente */
+    align-items: center;
+    /* Espaçamento entre os itens (label e input) */
+    gap: 15px;
+}
+
+.form-group label {
+    /* Texto em negrito */
+    font-weight: bold;
+    /* Cor do texto preta */
+    color: #000;
+    /* Largura mínima para alinhar os labels */
+    min-width: 100px;
+    /* Alinha o texto à direita */
+    text-align: right;
+}
+
+.form-group input, .form-group textarea {
+    /* Espaçamento interno */
+    padding: 10px;
+    /* Borda sutil */
+    border: 1px solid #ccc;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Largura do campo de input/textarea */
+    width: 60%;
+    /* Desabilita o redimensionamento do textarea pelo usuário */
+    resize: none;
+}
+
+.form-group textarea.nome {
+    /* Altura fixa para o textarea de ocorrência */
+    height: 100px;
+}
+
+.page-ocorrencia button {
+    /* Cor de fundo roxo */
+    background-color: #4b0082;
+    /* Cor do texto branca */
+    color: white;
+    /* Remove a borda */
+    border: none;
+    /* Espaçamento interno */
+    padding: 10px 20px;
+    /* Arredondamento dos cantos */
+    border-radius: 5px;
+    /* Cursor clicável */
+    cursor: pointer;
+    /* Tamanho da fonte */
+    font-size: 16px;
+    /* Texto em negrito */
+    font-weight: bold;
+    /* Margem superior */
+    margin-top: 15px;
+}
+
+.page-ocorrencia button:hover {
+    /* Efeito de hover: cor de fundo mais clara */
+    background-color: #6a0dad;
+}
