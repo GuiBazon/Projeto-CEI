@@ -83,14 +83,8 @@ input, textarea {
     text-align: center;
     /* Define a largura fixa da caixa */
     width: 300px;
-    /* Garante que a caixa fique sobre outros elementos */
-    z-index: 1;
 }
 
-.login-box h2 {
-    /* Margem inferior do título */
-    margin-bottom: 19px;
-}
 
 .login-box input {
     /* Largura total dentro do box */
@@ -99,38 +93,8 @@ input, textarea {
     padding: 10px;
     /* Margem vertical para separar os inputs */
     margin: 10px 0;
-    /* Borda cinza clara */
-    border: 1px solid #ccc;
     /* Arredondamento extremo para formato "pílula" */
     border-radius: 500px;
-}
-
-/* Estilo para o link "Acessar" (substitui o botão para redirecionamento sem JS) */
-.login-box .btn-acessar {
-    /* Transforma o link em um bloco */
-    display: block;
-    /* Largura do link (40% da caixa) */
-    width: 40%;
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Cor de fundo azul */
-    background-color: #007bff;
-    /* Cor do texto branca */
-    color: white;
-    /* Remove a borda */
-    border: none;
-    /* Arredondamento dos cantos */
-    border-radius: 7px;
-    /* Altera o cursor para indicar que é clicável */
-    cursor: pointer;
-    /* Centraliza o link horizontalmente e adiciona margem superior */
-    margin: 20px auto 0;
-    /* Deixa o texto em negrito */
-    font-weight: bold;
-    /* Remove o sublinhado do link */
-    text-decoration: none;
-    /* Centraliza o texto dentro do link */
-    text-align: center;
 }
 
 .login-box p a {
@@ -138,34 +102,7 @@ input, textarea {
     color: #007bff;
     /* Remove o sublinhado */
     text-decoration: none;
-    /* Margem superior para separar do botão */
-    margin-top: 10px;
-    /* Transforma o link em bloco */
-    display: block;
 }
-
-/* Footer específico da página de login */
-.page-login footer {
-    /* Cor do texto branca */
-    color: white;
-    /* Margem superior para separar da caixa de login */
-    margin-top: 20px;
-    /* Alinhamento do texto ao centro */
-    text-align: center;
-    /* Ocupa a largura total da página */
-    width: 100%;
-    /* Tamanho de fonte pequeno */
-    font-size: 12px;
-    /* Define o posicionamento fixo na base da tela */
-    position: fixed; 
-    /* Fixa na parte inferior */
-    bottom: 0;
-    /* Fundo transparente para não cobrir o gradiente principal */
-    background-color: transparent; 
-    /* Z-index baixo, mas acima do fundo */
-    z-index: 1;
-}
-
 
 /*
 ==================================================
