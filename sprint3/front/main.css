@@ -134,13 +134,6 @@ input, textarea {
     width: 300px;
 }
 
-.page-cadastro h2 {
-    /* Margem inferior do título */
-    margin-bottom: 20px;
-    /* Cor do texto */
-    color: #333;
-}
-
 .page-cadastro input {
     /* Ocupa a própria linha */
     display: block;
