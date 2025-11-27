@@ -1,134 +1,174 @@
-// Importa a conexão com o banco de dados (arquivo connect.js dentro da pasta db)
 const connect = require("../db/connect");
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
 
-// Exporta todas as funções do controller
-module.exports = {
+module.exports = class usuarioController {
 
-  // ---------- CRIAR USUÁRIO ----------
-  createUsuario: (req, res) => {
-    // Pega os dados enviados no corpo da requisição (nome, email, senha)
+  static async createUser(req, res) {
     const { nome_usuario, email, senha } = req.body;
 
-    // Verifica se todos os campos obrigatórios foram enviados
+    console.log("Valores Recebidos:", req.body);
+
     if (!nome_usuario || !email || !senha) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Verifica se o email contém '@' (validação simples)
     if (!email.includes("@")) {
-      return res.status(400).json({ mensagem: "Email inválido!" });
+      return res.status(400).json({ error: "Email inválido" });
     }
 
-    // Monta o comando SQL pra checar se já existe um usuário com esse email
-    const checkEmail = "SELECT * FROM usuario WHERE email = ?";
+    const hashedPassword = await bcrypt.hash(senha, SALT_ROUNDS);
 
-    // Executa a query de verificação
-    connect.query(checkEmail, [email], (err, results) => {
-      // Se der erro no servidor/banco
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
+    const query = `
+      INSERT INTO usuario (nome_usuario, email, senha)
+      VALUES (?, ?, ?)
+    `;
 
-      // Se o email já existir, não deixa cadastrar
-      if (results.length > 0) {
-        return res.status(400).json({ mensagem: "Email já cadastrado!" });
-      }
+    const values = [nome_usuario, email, hashedPassword];
 
-      // Se passou nas validações, insere o novo usuário no banco
-      const insertQuery = "INSERT INTO usuario (nome_usuario, email, senha) VALUES (?, ?, ?)";
-      connect.query(insertQuery, [nome_usuario, email, senha], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao cadastrar usuário" });
-        return res.status(201).json({ mensagem: "Usuário cadastrado com sucesso!" });
+    try {
+      connect.query(query, values, (err) => {
+        if (err) {
+          if (err.code === "ER_DUP_ENTRY") {
+            return res.status(400).json({ error: "Email já cadastrado" });
+          }
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno do servidor" });
+        }
+
+        return res.status(201).json({ message: "Usuário criado com sucesso" });
       });
-    });
-  },
+    } catch (error) {
+      console.error("Erro ao executar consulta:", error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
 
-  // ---------- LER TODOS OS USUÁRIOS ----------
-  readAllUsuario: (req, res) => {
-    // SQL pra buscar todos os usuários
-    const query = "SELECT * FROM usuario";
 
-    // Executa a consulta
-    connect.query(query, (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro ao buscar usuários" });
-      // Retorna todos os resultados encontrados
-      return res.status(200).json(results);
-    });
-  },
 
-  // ---------- LER USUÁRIO POR ID ----------
-  readUsuarioById: (req, res) => {
-    // Pega o ID da URL (ex: /usuario/5)
-    const { id } = req.params;
 
-    // SQL pra buscar o usuário pelo ID
-    const query = "SELECT * FROM usuario WHERE id_usuario = ?";
+  static async readUsers(req, res) {
+    const query = `SELECT * FROM usuario`;
 
-    // Executa a consulta com o ID recebido
-    connect.query(query, [id], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro ao buscar usuário" });
+    try {
+      connect.query(query, (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno do servidor" });
+        }
 
-      // Se não encontrar ninguém com esse ID
-      if (results.length === 0) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
-      }
+        return res.status(200).json({ message: "Usuários obtidos", usuarios: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
 
-      // Retorna o usuário encontrado (results[0] = primeiro resultado)
-      return res.status(200).json(results[0]);
-    });
-  },
 
-  // ---------- ATUALIZAR USUÁRIO ----------
-  updateUsuario: (req, res) => {
-    // Pega os dados enviados no corpo da requisição
-    const { id_usuario, nome_usuario, email, senha } = req.body;
 
-    // Verifica se todos os campos foram enviados
-    if (!id_usuario || !nome_usuario || !email || !senha) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+
+  static async updateUser(req, res) {
+    const id_usuario = req.params.id_usuario;
+    const { nome_usuario, email, senha } = req.body;
+
+    if (!nome_usuario || !email || !senha) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Verifica se o email contém '@'
-    if (!email.includes("@")) {
-      return res.status(400).json({ mensagem: "Email inválido!" });
+    const hashedPassword = await bcrypt.hash(senha, SALT_ROUNDS);
+
+    const query = `
+      UPDATE usuario
+      SET nome_usuario = ?, email = ?, senha = ?
+      WHERE id_usuario = ?
+    `;
+
+    const values = [nome_usuario, email, hashedPassword, id_usuario];
+
+    try {
+      connect.query(query, values, (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno do servidor" });
+        }
+
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Usuário não encontrado" });
+        }
+
+        return res.status(200).json({ message: "Usuário atualizado com sucesso" });
+      });
+    } catch (error) {
+      console.error("Erro ao executar consulta:", error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
+
+
+
+
+  static async deleteUser(req, res) {
+    const id_usuario = req.params.id_usuario;
+
+    const query = `DELETE FROM usuario WHERE id_usuario = ?`;
+    const values = [id_usuario];
+
+    try {
+      connect.query(query, values, (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno do servidor" });
+        }
+
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Usuário não encontrado" });
+        }
+
+        return res.status(200).json({ message: "Usuário excluído com sucesso" });
+      });
+    } catch (error) {
+      console.error("Erro ao executar consulta:", error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
+
+
+
+
+  static async loginUser(req, res) {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+      return res.status(400).json({ error: "Email e senha são obrigatórios" });
     }
 
-    // Antes de atualizar, confere se o ID realmente existe no banco
-    const checkQuery = "SELECT * FROM usuario WHERE id_usuario = ?";
-    connect.query(checkQuery, [id_usuario], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
-      if (results.length === 0) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
-      }
+    const query = `SELECT * FROM usuario WHERE email = ?`;
 
-      // Atualiza o usuário com os novos dados
-      const updateQuery = "UPDATE usuario SET nome_usuario = ?, email = ?, senha = ? WHERE id_usuario = ?";
-      connect.query(updateQuery, [nome_usuario, email, senha, id_usuario], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao atualizar usuário" });
-        return res.status(200).json({ mensagem: "Usuário atualizado com sucesso!" });
+    try {
+      connect.query(query, [email], async (err, results) => {
+        if (err) {
+          console.error("Erro ao executar consulta:", err);
+          return res.status(500).json({ error: "Erro interno do servidor" });
+        }
+
+        if (results.length === 0) {
+          return res.status(401).json({ error: "Usuário não cadastrado" });
+        }
+
+        const user = results[0];
+
+        const senhaCorreta = await bcrypt.compare(senha, user.senha);
+
+        if (!senhaCorreta) {
+          return res.status(401).json({ error: "Senha incorreta" });
+        }
+
+        return res.status(200).json({ message: "Login bem-sucedido", user });
       });
-    });
-  },
-
-  // ---------- DELETAR USUÁRIO ----------
-  deleteUsuario: (req, res) => {
-    // Pega o ID da URL
-    const { id } = req.params;
-
-    // Primeiro verifica se o ID existe no banco
-    const checkQuery = "SELECT * FROM usuario WHERE id_usuario = ?";
-    connect.query(checkQuery, [id], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
-
-      // Se não achar, retorna erro 404
-      if (results.length === 0) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
-      }
-
-      // Se achou, deleta o registro
-      const deleteQuery = "DELETE FROM usuario WHERE id_usuario = ?";
-      connect.query(deleteQuery, [id], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao deletar usuário" });
-        return res.status(200).json({ mensagem: "Usuário deletado com sucesso!" });
-      });
-    });
-  },
+    } catch (error) {
+      console.error("Erro ao executar consulta:", error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
 };

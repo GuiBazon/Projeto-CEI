@@ -1,0 +1,95 @@
+const connect = require("../db/connect");
+
+module.exports = class ocorrenciaController {
+
+  static async createOcorrencia(req, res) {
+    const { fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao } = req.body;
+
+    if (!fk_id_aluno || !fk_id_usuario || !data_ocorrencia) {
+      return res.status(400).json({ error: "Campos obrigatórios não preenchidos" });
+    }
+
+    const query = `
+      INSERT INTO ocorrencia (fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao)
+      VALUES (?, ?, ?, ?)
+    `;
+    const values = [fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao];
+
+    connect.query(query, values, (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      return res.status(201).json({ message: "Ocorrência registrada" });
+    });
+  }
+
+
+  static async readOcorrencias(req, res) {
+    const query = `
+      SELECT o.*, a.nome_aluno, u.nome_usuario
+      FROM ocorrencia o
+      JOIN aluno a ON o.fk_id_aluno = a.id_aluno
+      JOIN usuario u ON o.fk_id_usuario = u.id_usuario
+      ORDER BY data_ocorrencia DESC
+    `;
+
+    connect.query(query, (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+
+      return res.status(200).json({ ocorrencias: results });
+    });
+  }
+
+
+  static async updateOcorrencia(req, res) {
+    const id_ocorrencia = req.params.id_ocorrencia;
+    const { fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao } = req.body;
+
+    if (!fk_id_aluno || !fk_id_usuario || !data_ocorrencia) {
+      return res.status(400).json({ error: "Campos obrigatórios faltando" });
+    }
+
+    const query = `
+      UPDATE ocorrencia
+      SET fk_id_aluno = ?, fk_id_usuario = ?, data_ocorrencia = ?, descricao = ?
+      WHERE id_ocorrencia = ?
+    `;
+    const values = [fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao, id_ocorrencia];
+
+    connect.query(query, values, (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Ocorrência não encontrada" });
+      }
+
+      return res.status(200).json({ message: "Ocorrência atualizada" });
+    });
+  }
+
+
+  static async deleteOcorrencia(req, res) {
+    const id_ocorrencia = req.params.id_ocorrencia;
+
+    const query = "DELETE FROM ocorrencia WHERE id_ocorrencia = ?";
+
+    connect.query(query, [id_ocorrencia], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Ocorrência não encontrada" });
+      }
+
+      return res.status(200).json({ message: "Ocorrência excluída" });
+    });
+  }
+};

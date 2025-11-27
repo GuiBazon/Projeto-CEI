@@ -1,126 +1,98 @@
-// Importa a conexão com o banco de dados (arquivo connect.js dentro da pasta db)
 const connect = require("../db/connect");
 
-// Exporta as funções do controller
-module.exports = {
+module.exports = class alunoController {
 
-  // ---------- CRIAR ALUNO ----------
-  createAluno: (req, res) => {
-    // Pega os dados enviados no corpo da requisição
+  static async createAluno(req, res) {
     const { fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    // Verifica se todos os campos obrigatórios foram enviados
     if (!fk_id_turma || !nome_aluno || !cpf || !data_nascimento) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Expressão regular pra garantir que o CPF tenha exatamente 11 números
-    if (!/^\d{11}$/.test(cpf)) {
-      return res.status(400).json({ mensagem: "CPF deve conter exatamente 11 números!" });
+    if (isNaN(cpf) || cpf.length !== 11) {
+      return res.status(400).json({ error: "CPF inválido" });
     }
 
-    // Verifica se o CPF já está cadastrado no banco
-    const checkCpf = "SELECT * FROM aluno WHERE cpf = ?";
-    connect.query(checkCpf, [cpf], (err, results) => {
-      // Se der erro no banco/servidor
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
+    const query = `
+      INSERT INTO aluno (fk_id_turma, nome_aluno, cpf, data_nascimento)
+      VALUES (?, ?, ?, ?)
+    `;
+    const values = [fk_id_turma, nome_aluno, cpf, data_nascimento];
 
-      // Se o CPF já existir, bloqueia o cadastro
-      if (results.length > 0) return res.status(400).json({ mensagem: "CPF já cadastrado!" });
-
-      // Se passou nas validações, insere o aluno
-      const insertQuery = "INSERT INTO aluno (fk_id_turma, nome_aluno, cpf, data_nascimento) VALUES (?, ?, ?, ?)";
-      connect.query(insertQuery, [fk_id_turma, nome_aluno, cpf, data_nascimento], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao cadastrar aluno" });
-        return res.status(201).json({ mensagem: "Aluno cadastrado com sucesso!" });
-      });
+    connect.query(query, values, (err) => {
+      if (err) {
+        if (err.code === "ER_DUP_ENTRY") {
+          return res.status(400).json({ error: "CPF já cadastrado" });
+        }
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      return res.status(201).json({ message: "Aluno criado com sucesso" });
     });
-  },
+  }
 
-  // ---------- LER TODOS OS ALUNOS ----------
-  readAllAluno: (req, res) => {
-    // SQL pra buscar todos os alunos cadastrados
-    const query = "SELECT * FROM aluno";
 
-    // Executa a query
+  static async readAlunos(req, res) {
+    const query = `
+      SELECT a.*, t.nome_turma, t.curso
+      FROM aluno a
+      JOIN turma t ON a.fk_id_turma = t.id_turma
+    `;
+
     connect.query(query, (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro ao buscar alunos" });
-      // Retorna todos os registros encontrados
-      return res.status(200).json(results);
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      return res.status(200).json({ alunos: results });
     });
-  },
+  }
 
-  // ---------- LER ALUNO POR ID ----------
-  readAlunobyId: (req, res) => {
-    // Pega o ID enviado na URL (ex: /aluno/3)
-    const { id } = req.params;
 
-    // SQL pra buscar um aluno pelo ID
-    const query = "SELECT * FROM aluno WHERE id_aluno = ?";
+  static async updateAluno(req, res) {
+    const id_aluno = req.params.id_aluno;
+    const { fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;
 
-    // Executa a consulta
-    connect.query(query, [id], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro ao buscar aluno" });
-
-      // Se não encontrar nenhum aluno com o ID informado
-      if (results.length === 0) return res.status(404).json({ mensagem: "Aluno não encontrado" });
-
-      // Retorna o aluno encontrado
-      return res.status(200).json(results[0]);
-    });
-  },
-
-  // ---------- ATUALIZAR ALUNO ----------
-  updateAluno: (req, res) => {
-    // Pega os dados do corpo da requisição
-    const { id_aluno, fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;
-
-    // Verifica se todos os campos foram enviados
-    if (!id_aluno || !fk_id_turma || !nome_aluno || !cpf || !data_nascimento) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+    if (!fk_id_turma || !nome_aluno || !cpf || !data_nascimento) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Valida o formato do CPF (11 dígitos)
-    if (!/^\d{11}$/.test(cpf)) {
-      return res.status(400).json({ mensagem: "CPF deve conter exatamente 11 números!" });
-    }
+    const query = `
+      UPDATE aluno
+      SET fk_id_turma = ?, nome_aluno = ?, cpf = ?, data_nascimento = ?
+      WHERE id_aluno = ?
+    `;
+    const values = [fk_id_turma, nome_aluno, cpf, data_nascimento, id_aluno];
 
-    // Verifica se o ID informado realmente existe no banco
-    const checkQuery = "SELECT * FROM aluno WHERE id_aluno = ?";
-    connect.query(checkQuery, [id_aluno], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
+    connect.query(query, values, (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Aluno não encontrado" });
+      }
 
-      // Se o ID não existir, não tem o que atualizar
-      if (results.length === 0) return res.status(404).json({ mensagem: "Aluno não encontrado" });
-
-      // Atualiza o aluno com os novos dados
-      const updateQuery = "UPDATE aluno SET fk_id_turma = ?, nome_aluno = ?, cpf = ?, data_nascimento = ? WHERE id_aluno = ?";
-      connect.query(updateQuery, [fk_id_turma, nome_aluno, cpf, data_nascimento, id_aluno], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao atualizar aluno" });
-        return res.status(200).json({ mensagem: "Aluno atualizado com sucesso!" });
-      });
+      return res.status(200).json({ message: "Aluno atualizado com sucesso" });
     });
-  },
+  }
 
-  // ---------- DELETAR ALUNO ----------
-  deleteAluno: (req, res) => {
-    // Pega o ID do aluno pela URL
-    const { id } = req.params;
 
-    // Confere se o ID existe antes de deletar
-    const checkQuery = "SELECT * FROM aluno WHERE id_aluno = ?";
-    connect.query(checkQuery, [id], (err, results) => {
-      if (err) return res.status(500).json({ erro: "Erro no servidor" });
+  static async deleteAluno(req, res) {
+    const id_aluno = req.params.id_aluno;
 
-      // Se não encontrar, retorna erro 404
-      if (results.length === 0) return res.status(404).json({ mensagem: "Aluno não encontrado" });
+    const query = "DELETE FROM aluno WHERE id_aluno = ?";
 
-      // Se o aluno existir, deleta do banco
-      const deleteQuery = "DELETE FROM aluno WHERE id_aluno = ?";
-      connect.query(deleteQuery, [id], (err) => {
-        if (err) return res.status(500).json({ erro: "Erro ao deletar aluno" });
-        return res.status(200).json({ mensagem: "Aluno deletado com sucesso!" });
-      });
+    connect.query(query, [id_aluno], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Aluno não encontrado" });
+      }
+
+      return res.status(200).json({ message: "Aluno excluído com sucesso" });
     });
-  },
+  }
 };
