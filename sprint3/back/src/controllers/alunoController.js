@@ -49,6 +49,24 @@ module.exports = class alunoController {
   }
 
 
+  // Busca apenas UM aluno pelo ID
+  static async readAlunoById(req, res) {
+    const id_aluno = req.params.id_aluno;
+    const query = `SELECT * FROM aluno WHERE id_aluno = ?`;
+
+    connect.query(query, [id_aluno], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno" });
+      }
+      if (results.length === 0) {
+        return res.status(404).json({ error: "Aluno não encontrado" });
+      }
+      return res.status(200).json(results[0]);
+    });
+  }
+
+
   static async updateAluno(req, res) {
     const id_aluno = req.params.id_aluno;
     const { fk_id_turma, nome_aluno, cpf, data_nascimento } = req.body;

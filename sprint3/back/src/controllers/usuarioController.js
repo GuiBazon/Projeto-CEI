@@ -66,6 +66,27 @@ module.exports = class usuarioController {
   }
 
 
+  // Busca apenas UM usuário pelo ID
+  static async readUserById(req, res) {
+    const id_usuario = req.params.id_usuario;
+    const query = `SELECT * FROM usuario WHERE id_usuario = ?`;
+
+    try {
+      connect.query(query, [id_usuario], (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno" });
+        }
+        if (results.length === 0) {
+          return res.status(404).json({ error: "Usuário não encontrado" });
+        }
+        return res.status(200).json(results[0]);
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno" });
+    }
+  }
 
 
   static async updateUser(req, res) {
