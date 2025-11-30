@@ -1,31 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Ocorrência</title>
-    <link rel="stylesheet" href="main.css" />
-  </head>
-  <body class="page-ocorrencia">
-    <div class="container">
-      <div class="circle"></div>
-      <p>Nome</p>
-      <h1>Registrar Ocorrência</h1>
-      <div class="form-group">
-        <label>Turma</label>
-        <input type="text" name="turma" />
-        <label>Curso</label>
-        <input type="text" name="curso" />
-      </div>
-      <div class="form-group">
-        <label>Nova Ocorrência</label>
-        <textarea class="nome" name="ocorrencia"></textarea>
-      </div>
-      <a href="home.html"
-        ><button type="submit">Adicionar Ocorrência</button></a
-      >
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="card-box">
+        <h1>Registrar Ocorrência</h1>
+        
+        <form onsubmit="salvarOcorrenciaFake(event)">
+            
+            <input type="text" placeholder="CPF do Aluno" required>
+            
+            <input type="text" placeholder="Data do Ocorrido" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+            
+            <textarea placeholder="Descreva o motivo da ocorrência..." rows="5" required></textarea>
+            
+            <button type="submit">Registrar</button>
+        </form>
+
+        <p class="link-voltar-container">
+            <a href="home.html">Cancelar / Voltar</a>
+        </p>
     </div>
 
     <footer class="footer-padrao">&copy; Carômetro escolar 2025.</footer>
-  </body>
+
+    <script>
+        function salvarOcorrenciaFake(event) {
+            event.preventDefault();
+            // Aqui futuramente você pegaria o CPF digitado para mandar pro banco
+            alert("Ocorrência registrada com sucesso!");
+            window.location.href = 'home.html';
+        }
+    </script>
+
+</body>
 </html>

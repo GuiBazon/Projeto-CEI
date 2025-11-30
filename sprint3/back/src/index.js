@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const testConnect = require("./db/testConnect");
 
 class AppController {
@@ -11,6 +12,7 @@ class AppController {
 
   // Permite que a aplicacao receba dados em formato JSON nas requires
   middlewares() {
+    this.express.use(cors());
     this.express.use(express.json());
   }
 

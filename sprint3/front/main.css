@@ -1,596 +1,364 @@
-/*
-==================================================
-  Estilos Globais/Reset
-  Seletor: body, input, textarea
-==================================================
-*/
-body {
-    /* Define a fonte padrão para o texto */
-    font-family: Arial, sans-serif;
-    /* Remove as margens externas padrão do navegador */
+/* =========================================
+   1. RESET E CONFIGURAÇÕES GERAIS
+   ========================================= */
+* {
     margin: 0;
-    /* Remove o preenchimento interno padrão do navegador */
     padding: 0;
-    /* Garante que o corpo ocupe 100% da altura da tela */
-    height: 100vh;
-    /* Define o modelo de caixa para garantir que padding e borda sejam incluídos na largura/altura */
-    box-sizing: border-box; 
-}
-
-input, textarea {
-    /* Aplica o modelo de caixa para inputs e textareas */
     box-sizing: border-box;
-    /* Garante que a fonte seja herdada do body */
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-
-/*
-==================================================
-  FOOTER PADRÃO
-  Seletor: .footer-padrao
-==================================================
-*/
-.footer-padrao {
-    /* Define o posicionamento fixo na tela */
-    position: fixed;
-    /* Fixa o elemento na parte inferior da tela */
-    bottom: 0;
-    /* Ocupa a largura total da tela */
-    width: 100%;
-    /* Define a cor de fundo do rodapé */
-    background-color: #1a1a4a;
-    /* Define a cor do texto como branco */
-    color: white;
-    /* Centraliza o texto */
-    text-align: center;
-    /* Adiciona preenchimento interno vertical */
-    padding: 5px 0;
-    /* Define um tamanho de fonte pequeno */
-    font-size: 12px;
-    /* Garante que o footer fique na camada superior */
-    z-index: 100;
-}
-
-
-/*
-==================================================
-  PÁGINA DE LOGIN (login.html)
-  Seletor de Escopo: .page-login
-==================================================
-*/
-.page-login {
-    /* Aplica um gradiente de fundo */
-    background: linear-gradient(to top,#0A002D, #200093);
-    /* Usa Flexbox para o layout */
-    display:flex;
-    /* Centraliza os itens horizontalmente */
-    justify-content: center;
-    /* Centraliza os itens verticalmente */
-    align-items: center;
-    /* Organiza os itens em coluna (vertical) */
-    flex-direction: column;
-}
-
-.login-box {
-    /* Cor de fundo da caixa de login */
-    background-color: #f0f0f0;
-    /* Espaçamento interno da caixa */
-    padding: 40px;
-    /* Arredondamento dos cantos */
-    border-radius: 10px;
-    /* Alinhamento do texto ao centro */
-    text-align: center;
-    /* Define a largura fixa da caixa */
-    width: 300px;
-}
-
-
-.login-box input {
-    /* Largura total dentro do box */
-    width: 100%;
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Margem vertical para separar os inputs */
-    margin: 10px 0;
-    /* Arredondamento extremo para formato "pílula" */
-    border-radius: 500px;
-}
-
-.login-box p a {
-    /* Cor do link azul */
-    color: #007bff;
-    /* Remove o sublinhado */
-    text-decoration: none;
-}
-
-/*
-==================================================
-  PÁGINA DE CADASTRO (cadastro.html)
-  Seletor de Escopo: .page-cadastro
-==================================================
-*/
-.page-cadastro {
-    /* Gradiente de fundo */
-    background: linear-gradient(to top , #0A002D, #200093);
-    /* Usa Flexbox */
+body {
+    /* Fundo degradê Azul Escuro */
+    background: linear-gradient(to bottom, #020024, #090979);
+    height: 100vh;
+    width: 100vw;
     display: flex;
-    /* Centraliza horizontalmente */
     justify-content: center;
-    /* Centraliza verticalmente */
     align-items: center;
 }
 
-.page-cadastro .container {
-    /* Cor de fundo do container cinza claro */
-    background: #d3d3d3;
-    /* Espaçamento interno */
-    padding: 20px;
-    /* Arredondamento dos cantos */
+/* =========================================
+   2. ESTILO DOS CARTÕES (LOGIN, CADASTROS, FORMS)
+   ========================================= */
+.card-box {
+    background-color: #D9D9D9; /* Cinza do protótipo */
+    color: #000;
+    width: 500px;
+    padding: 60px;
     border-radius: 15px;
-    /* Alinhamento do texto */
     text-align: center;
-    /* Largura do container */
-    width: 300px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    z-index: 10;
+    position: relative;
 }
 
-.page-cadastro input {
-    /* Ocupa a própria linha */
-    display: block;
-    /* 90% da largura do container */
-    width: 90%;
-    /* Margem vertical e centralização horizontal */
-    margin: 15px auto;
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Borda sutil */
-    border: 1px solid #ccc;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Cor de fundo do campo de input */
-    background: #f9f9f9;
+.card-box h1 {
+    margin-bottom: 40px;
+    color: #000;
+    font-size: 32px;
 }
 
-.page-cadastro button {
-    /* 90% da largura do container */
-    width: 90%;
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Cor de fundo roxo */
-    background-color: #4b0082;
-    /* Cor do texto branca */
-    color: white;
-    /* Remove a borda */
+/* ESTILO PADRÃO PARA INPUTS, SELECTS E TEXTAREAS (Atualizado!) */
+input, select, textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 25px;
+    background-color: #fff; /* Fundo branco */
+    color: #000; /* Texto preto */
     border: none;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Cursor clicável */
-    cursor: pointer;
-    /* Texto em negrito */
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    resize: none; /* Impede redimensionar o textarea manualmente */
+}
+
+/* Ajuste específico para placeholder (cor cinza escuro para ler melhor) */
+::placeholder {
+    color: #555;
+    opacity: 1;
+}
+
+/* Estilo padrão para Botões Roxos (SEM ANIMAÇÃO) */
+button {
+    background-color: #5856d6;
+    color: white;
+    width: 40%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer; /* Mantém a mãozinha */
+    margin-top: 10px;
+}
+
+/* Link de "Voltar" abaixo do botão */
+.link-voltar-container {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.link-voltar-container a {
+    color: #333;
+    text-decoration: none;
     font-weight: bold;
 }
 
-.page-cadastro button:hover {
-    /* Efeito de hover: cor de fundo mais clara */
-    background-color: #6a0dad;
+.link-voltar-container a:hover {
+    text-decoration: underline;
 }
 
+/* =========================================
+   3. ESTILOS DA HOME (DASHBOARD)
+   ========================================= */
 
-/*
-==================================================
-  PÁGINA HOME (home.html)
-  Seletor de Escopo: .page-home
-==================================================
-*/
-.page-home {
-    /* Cor de fundo principal */
-    background: #1a1a4a;
-    /* Usa Flexbox */
+/* Container Principal (Janela do Dashboard) */
+.dashboard-container {
+    width: 95%;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.05); /* Levemente transparente */
+    border-radius: 15px;
     display: flex;
-    /* Centraliza horizontalmente */
-    justify-content: center;
-    /* Centraliza verticalmente */
-    align-items: center;
-    /* Esconde qualquer conteúdo que exceda a área do body */
     overflow: hidden;
-    /* Cor de texto padrão para a Home */
-    color: #fff;
-    /* Adiciona padding na parte inferior para o footer fixo não cobrir o conteúdo */
-    padding-bottom: 30px; 
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
 }
 
-.page-home .container {
-    /* Cor de fundo do container principal */
-    background: #2a2a72;
-    /* Largura do container */
-    width: 90%;
-    /* Altura do container */
-    height: 90%;
-    /* Define posição relativa para posicionamento interno */
-    position: relative;
-    /* Esconde conteúdo excedente */
-    overflow: hidden;
-    /* Usa Flexbox para o layout lateral (sidebar e content) */
-    display: flex;
-}
-
+/* --- BARRA LATERAL (SIDEBAR) --- */
 .sidebar {
-    /* Largura da barra lateral (20% do container) */
-    width: 20%;
-    /* Cor de fundo da barra lateral */
-    background: #2a4066;
-    /* Espaçamento interno */
-    padding: 20px 10px;
-    /* Define posição relativa */
-    position: relative;
-}
-
-.sidebar h3 {
-    /* Cor do texto do título */
-    color: #bbb;
-    /* Margem vertical */
-    margin: 0 0 20px;
-    /* Alinha o texto ao centro */
-    text-align: center;
-    /* Tamanho da fonte */
-    font-size: 16px;
-    /* Transforma o texto em maiúsculas */
-    text-transform: uppercase;
-}
-
-.sidebar ul {
-    /* Remove os marcadores de lista */
-    list-style: none;
-    /* Remove o preenchimento padrão da lista */
-    padding: 0;
-}
-
-.sidebar ul li {
-    /* Cor de fundo dos itens da lista */
-    background: #3a4a6a;
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Margem inferior para espaçamento entre itens */
-    margin-bottom: 10px;
-    /* Cor do texto */
-    color: #ddd;
-    /* Arredondamento dos cantos */
-    border-radius: 3px;
-    /* Alinha o texto ao centro */
-    text-align: center;
-    /* Tamanho da fonte */
-    font-size: 14px;
-    /* Transforma o texto em maiúsculas */
-    text-transform: uppercase;
-}
-
-.content {
-    /* Largura do conteúdo principal (80% do container) */
-    width: 80%;
-    /* Espaçamento interno */
-    padding: 20px;
-    /* Define posição relativa */
-    position: relative;
-    /* Gradiente de fundo para o conteúdo */
-    background:linear-gradient(to top ,#200093, #0A002D);
-    /* Usa Flexbox para organizar o conteúdo verticalmente */
+    width: 250px;
+    background-color: #2b4c7e;
     display: flex;
-    /* Organiza os itens em coluna */
     flex-direction: column;
-    /* Alinha os itens ao centro (horizontalmente) */
-    align-items: center;
-    /* Distribui o espaço entre os itens */
-    justify-content: space-between;
-    /* Garante 100% da altura para o espaçamento funcionar */
-    height: 100%;
 }
 
-.header-home {
-    /* Usa flexbox para posicionar a barra de busca e o botão lado a lado */
-    display: flex;
-    /* Alinha os itens na ponta direita */
-    justify-content: flex-end;
-    /* Ocupa a largura total do .content */
-    width: 100%;
-    /* Margem inferior para espaçar do conteúdo principal */
-    margin-bottom: 20px;
-    /* Alinha os itens verticalmente */
-    align-items: center;
-    /* Espaçamento entre os itens */
-    gap: 20px;
-}
-
-.search-bar {
-    /* Cor de fundo da barra de busca */
-    background: #666;
-    /* Espaçamento interno */
-    padding: 5px 10px;
-    /* Arredondamento dos cantos */
-    border-radius: 3px;
-    /* Alinhamento do texto */
+.sidebar-header {
+    background-color: #1a2f4e;
+    padding: 20px;
     text-align: center;
-    /* Largura da barra de busca */
-    width: 300px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.turma-item {
+    background-color: #3b5f96;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --- ÁREA DE CONTEÚDO (DIREITA) --- */
+.content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(to right, #0a0a30, #1a0b3b);
+}
+
+/* Barra Superior (Botões e Busca) */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.btn-top {
+    background-color: #d9d9d9;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Ajuste específico para inputs dentro da barra de pesquisa */
+.search-bar {
+    background-color: #8c8c8c;
+    border-radius: 20px;
+    padding: 5px 15px;
+    width: 40%;
 }
 
 .search-bar input {
-    /* Fundo transparente */
     background: transparent;
-    /* Sem borda */
     border: none;
-    /* Espaçamento interno */
-    padding: 6px;
-    /* Cor do texto branca */
-    color: #fff;
-    /* Largura total */
-    width: 100%;
-    /* Tamanho da fonte */
-    font-size: 14px;
-    /* Alinhamento do texto */
-    text-align: center;
-    /* Remove o contorno ao focar */
-    outline: none;
+    margin: 0;
+    padding: 5px;
+    color: #000;
+    text-align: left;
+    margin-bottom: 0;
 }
 
 .search-bar input::placeholder {
-    /* Cor do texto do placeholder */
-    color: #bbb;
+    color: #333;
 }
 
-.btn-cadastro-usuario {
-    /* Cor de fundo roxo */
-    background-color: #4b0082;
-    /* Cor do texto branca */
-    color: white;
-    /* Decoração de link removida */
-    text-decoration: none;
-    /* Espaçamento interno */
-    padding: 10px 15px;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Texto em negrito */
-    font-weight: bold;
-    /* Transforma o link em bloco para aceitar padding */
-    display: inline-block;
-    /* Tamanho da fonte */
-    font-size: 14px;
-    /* Alinha o texto ao centro */
-    text-align: center;
-}
-
-.btn-cadastro-usuario:hover {
-    /* Efeito de hover: cor de fundo mais clara */
-    background-color: #6a0dad;
-}
-
-.main-content {
-    /* Define que este elemento deve crescer (ocupar o espaço restante) */
-    flex-grow: 1;
-    /* Habilita a rolagem vertical, se o conteúdo exceder (Corrige botões cortados) */
-    overflow-y: auto; 
-    /* Garante que ocupe a largura total */
-    width: 100%;
-    /* Espaçamento interno */
-    padding: 10px 0;
-    /* Usa flexbox para centralizar os círculos */
-    display: flex;
-    /* Centraliza horizontalmente */
-    justify-content: center;
-    /* Alinha o conteúdo ao topo */
-    align-items: flex-start;
-}
-
-.circles {
-    /* Usa CSS Grid para o layout dos círculos */
+/* Grade de Alunos (Bolinhas) */
+.grid-alunos {
     display: grid;
-    /* Define 4 colunas de 100px cada */
-    grid-template-columns: repeat(4, 100px);
-    /* Define 2 linhas de 120px cada */
-    grid-template-rows: repeat(2, 120px);
-    /* Espaçamento entre as células da grid */
-    gap: 60px;
-    /* Remove margens extras */
-    margin: 0;
-    /* Adiciona preenchimento interno */
-    padding: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-items: center;
+    overflow-y: auto;
+    padding-bottom: 80px;
 }
 
-.circle-item {
-    /* Usa Flexbox para alinhamento vertical dentro do item */
+.aluno-card {
     display: flex;
-    /* Organiza em coluna */
     flex-direction: column;
-    /* Centraliza horizontalmente */
     align-items: center;
-}
-
-.circle {
-    /* Largura do círculo */
-    width: 100px;
-    /* Altura do círculo */
-    height: 100px;
-    /* Cor de fundo branca */
-    background: #fff;
-    /* Arredondamento para criar um círculo perfeito */
-    border-radius: 50%;
-    /* Margem inferior */
-    margin-bottom: 5px;
-}
-
-.circle-item span {
-    /* Cor do texto do nome */
-    color: #fff;
-    /* Tamanho da fonte */
-    font-size: 12px;
-}
-
-.buttons {
-    /* Usa Flexbox para os botões inferiores */
-    display: flex;
-    /* Espaçamento entre os botões */
-    gap: 20px;
-    /* Margem superior para separar do conteúdo rolável */
-    margin-top: 20px; 
-    /* Margem inferior */
-    margin-bottom: 5px; 
-}
-
-.buttons button {
-    /* Espaçamento interno */
-    padding: 10px 20px;
-    /* Cor de fundo azul */
-    background-color: #007bff;
-    /* Cor do texto branca */
     color: white;
-    /* Remove a borda */
-    border: none;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Cursor clicável */
-    cursor: pointer;
-    /* Texto em negrito */
-    font-weight: bold;
-    /* Transforma o texto em maiúsculas */
-    text-transform: uppercase;
+    font-size: 14px;
 }
 
-.buttons button:hover {
-    /* Efeito de hover: cor de fundo mais escura */
-    background-color: #0056b3;
-}
-
-
-/*
-==================================================
-  PÁGINA DE OCORRÊNCIA (ocorrencia.html)
-  Seletor de Escopo: .page-ocorrencia
-==================================================
-*/
-.page-ocorrencia {
-    /* Gradiente de fundo */
-    background: linear-gradient(to top, #200093, #0A002D);
-    /* Cor de texto padrão branca */
-    color: #fff;
-    /* Usa Flexbox */
-    display: flex;
-    /* Centraliza horizontalmente */
-    justify-content: center;
-    /* Centraliza verticalmente */
-    align-items: center;
-    /* Preenchimento geral da página */
-    padding: 20px;
-    /* Adiciona padding na parte inferior para o footer fixo não cobrir o conteúdo */
-    padding-bottom: 30px; 
-}
-
-.page-ocorrencia .container {
-    /* Cor de fundo do container cinza */
-    background-color: #d3c9c9;
-    /* Espaçamento interno */
-    padding: 30px;
-    /* Arredondamento dos cantos */
-    border-radius: 15px;
-    /* Largura do container */
-    width: 500px;
-    /* Alinhamento do texto */
-    text-align: center;
-    /* Sombra ao redor do container */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-.page-ocorrencia .circle {
-    /* Largura do círculo */
-    width: 100px;
-    /* Altura do círculo */
-    height: 100px;
-    /* Cor de fundo branca */
-    background-color: #fff;
-    /* Arredondamento para círculo */
+.bolinha {
+    width: 90px;
+    height: 90px;
+    background-color: white;
     border-radius: 50%;
-    /* Centraliza horizontalmente e adiciona margem inferior */
-    margin: 0 auto 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-.page-ocorrencia p {
-    /* Cor do texto preta (sobre o fundo cinza) */
-    color: #000;
-    /* Margem inferior */
-    margin-bottom: 5px;
-}
-
-.page-ocorrencia h1 {
-    /* Tamanho da fonte do título */
-    font-size: 26px;
-    /* Margem inferior para espaçamento */
-    margin-bottom: 35px;
-    /* Cor do título preta */
-    color: #000;
-}
-
-.form-group {
-    /* Margem inferior */
-    margin-bottom: 25px;
-    /* Usa Flexbox para alinhar label e input */
+/* Botões Inferiores */
+.bottom-actions {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
     display: flex;
-    /* Centraliza o grupo horizontalmente */
     justify-content: center;
-    /* Centraliza verticalmente */
-    align-items: center;
-    /* Espaçamento entre os itens (label e input) */
-    gap: 15px;
+    gap: 20px;
+    left: 0;
 }
 
-.form-group label {
-    /* Texto em negrito */
-    font-weight: bold;
-    /* Cor do texto preta */
+.btn-bottom {
+    background-color: #d9d9d9;
     color: #000;
-    /* Largura mínima para alinhar os labels */
+    padding: 10px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* =========================================
+   4. ESTILOS DA LISTA DE OCORRÊNCIAS
+   ========================================= */
+
+/* Container específico da lista */
+.lista-container {
+    width: 90%;
+    max-width: 1000px;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    overflow-y: auto;
+}
+
+/* Cabeçalho da Lista */
+.lista-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    color: white;
+}
+.lista-header h2 { text-transform: uppercase; letter-spacing: 2px; }
+
+/* Botão Sair/Voltar */
+.btn-sair {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* Item da Lista (Linha) */
+.item-linha {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+/* Bolinha do Avatar na Lista */
+.avatar-lista {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* O Retângulo Cinza com as infos */
+.card-info-cinza {
+    flex: 1;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+}
+
+/* Coluna da Esquerda (Dados do Aluno) */
+.dados-aluno {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    width: 40%;
+}
+
+.dados-aluno span { display: flex; align-items: center; }
+
+/* Barrinhas cinza escuro */
+.barrinha-texto {
+    background-color: #a0a0a0;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-weight: normal;
+    display: inline-block;
     min-width: 100px;
-    /* Alinha o texto à direita */
+}
+
+/* Coluna da Direita (Bloco da Ocorrência) */
+.bloco-ocorrencia {
+    width: 50%;
     text-align: right;
 }
 
-.form-group input, .form-group textarea {
-    /* Espaçamento interno */
-    padding: 10px;
-    /* Borda sutil */
-    border: 1px solid #ccc;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Largura do campo de input/textarea */
-    width: 60%;
-    /* Desabilita o redimensionamento do textarea pelo usuário */
-    resize: none;
-}
-
-.form-group textarea.nome {
-    /* Altura fixa para o textarea de ocorrência */
-    height: 100px;
-}
-
-.page-ocorrencia button {
-    /* Cor de fundo roxo */
-    background-color: #4b0082;
-    /* Cor do texto branca */
-    color: white;
-    /* Remove a borda */
-    border: none;
-    /* Espaçamento interno */
-    padding: 10px 20px;
-    /* Arredondamento dos cantos */
-    border-radius: 5px;
-    /* Cursor clicável */
-    cursor: pointer;
-    /* Tamanho da fonte */
-    font-size: 16px;
-    /* Texto em negrito */
+.titulo-ocorrencia {
+    margin-bottom: 5px;
     font-weight: bold;
-    /* Margem superior */
-    margin-top: 15px;
+    color: #000;
 }
 
-.page-ocorrencia button:hover {
-    /* Efeito de hover: cor de fundo mais clara */
-    background-color: #6a0dad;
+.caixa-texto-ocorrencia {
+    background-color: #8c8c8c;
+    height: 60px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    padding: 5px;
+}
+
+/* =========================================
+   5. RODAPÉ FIXO (FOOTER)
+   ========================================= */
+.footer-padrao {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    z-index: 100;
 }
