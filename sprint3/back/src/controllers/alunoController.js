@@ -49,7 +49,7 @@ module.exports = class alunoController {
   }
 
 
-  // Busca apenas UM aluno pelo ID
+
   static async readAlunoById(req, res) {
     const id_aluno = req.params.id_aluno;
     const query = `SELECT * FROM aluno WHERE id_aluno = ?`;
@@ -65,6 +65,7 @@ module.exports = class alunoController {
       return res.status(200).json(results[0]);
     });
   }
+
 
 
   static async updateAluno(req, res) {
@@ -95,6 +96,7 @@ module.exports = class alunoController {
     });
   }
 
+  
 
   static async deleteAluno(req, res) {
     const id_aluno = req.params.id_aluno;

@@ -1,7 +1,7 @@
 create database cei;
 use cei;
 
--- 1. TABELAS (Estrutura)
+
 
 create table usuario (
   id_usuario int auto_increment primary key,
@@ -30,17 +30,16 @@ create table ocorrencia (
   fk_id_aluno int not null,
   fk_id_usuario int not null,
   data_ocorrencia datetime not null,
-  -- AJUSTE: Mudei de varchar(100) para TEXT para caber textos longos
-  descricao TEXT, 
+  descricao VARCHAR(255), 
   foreign key (fk_id_aluno) references aluno(id_aluno),
   foreign key (fk_id_usuario) references usuario(id_usuario)
 );
 
--- 2. DADOS (Populate)
+
 
 insert into usuario (nome_usuario, email, senha) values
-('Adriano Donizete', 'adriano.donizete@docente.senai.com', 'dridrilegal123'),
-('Euller Ferreira', 'euller.ferreira@docente.senai.com', 'eu77ffgameplays');
+('Adriano Donizete', 'adriano10@docente.senai.com', 'dredre'),
+('Euller Ferreira', 'euller7@docente.senai.com', 'oiler');
 
 insert into turma (nome_turma, curso) values
 ('1C', 'desenvolvimento de sistemas');
@@ -82,12 +81,8 @@ insert into ocorrencia (fk_id_aluno, fk_id_usuario, data_ocorrencia, descricao) 
 (9, 2, '2025-10-09 09:40:00', 'Conversando em sala.'),
 (26, 1, '2025-10-08 07:10:00', 'Chegou 10 minutos atrasado.');
 
--- =======================================================
--- 3. REQUISITOS SPRINT 3 (O QUE FALTAVA)
--- =======================================================
 
--- VIEW: Para listar ocorrências trazendo o nome do Aluno e do Usuário
--- (Isso cumpre o requisito de "Queries com JOIN registradas com views")
+
 CREATE OR REPLACE VIEW vw_detalhes_ocorrencias AS
 SELECT 
     o.id_ocorrencia,
@@ -107,11 +102,10 @@ JOIN
     usuario u ON o.fk_id_usuario = u.id_usuario;
 
 
--- PROCEDURE: Para registrar ocorrência
--- (Isso cumpre o requisito de "controller de Ocorrências utilizando Procedure")
+
 DELIMITER $$
 
-CREATE PROCEDURE sp_nova_ocorrencia(
+CREATE PROCEDURE proc_nova_ocorrencia(
     IN p_id_aluno INT,
     IN p_id_usuario INT,
     IN p_descricao TEXT
@@ -122,49 +116,3 @@ BEGIN
 END $$
 
 DELIMITER ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

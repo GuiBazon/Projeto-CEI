@@ -25,6 +25,7 @@ module.exports = class turmaController {
   }
 
 
+
   static async readTurmas(req, res) {
     const query = `SELECT * FROM turma`;
 
@@ -36,6 +37,7 @@ module.exports = class turmaController {
       return res.status(200).json({ turmas: results });
     });
   }
+
 
 
   static async updateTurma(req, res) {
@@ -65,6 +67,7 @@ module.exports = class turmaController {
     });
   }
 
+  
 
   static async deleteTurma(req, res) {
     const id_turma = req.params.id_turma;

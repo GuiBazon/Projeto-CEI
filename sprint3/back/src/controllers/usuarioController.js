@@ -46,7 +46,6 @@ module.exports = class usuarioController {
 
 
 
-
   static async readUsers(req, res) {
     const query = `SELECT * FROM usuario`;
 
@@ -66,7 +65,7 @@ module.exports = class usuarioController {
   }
 
 
-  // Busca apenas UM usuário pelo ID
+
   static async readUserById(req, res) {
     const id_usuario = req.params.id_usuario;
     const query = `SELECT * FROM usuario WHERE id_usuario = ?`;
@@ -87,6 +86,7 @@ module.exports = class usuarioController {
       return res.status(500).json({ error: "Erro interno" });
     }
   }
+
 
 
   static async updateUser(req, res) {
@@ -128,7 +128,6 @@ module.exports = class usuarioController {
 
 
 
-
   static async deleteUser(req, res) {
     const id_usuario = req.params.id_usuario;
 
@@ -153,7 +152,6 @@ module.exports = class usuarioController {
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   }
-
 
 
 
