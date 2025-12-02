@@ -7,7 +7,7 @@ module.exports = class ocorrenciaController {
 
     connect.query(query, (err, results) => {
       if (err) {
-        console.error(err);
+        console.error(err.sqlMessage);
         return res.status(500).json({ error: "Erro ao buscar detalhes" });
       }
       return res.status(200).json(results);
@@ -63,20 +63,14 @@ module.exports = class ocorrenciaController {
 
 
   static async readOcorrencias(req, res) {
-    const query = `
-      SELECT o.*, a.nome_aluno, u.nome_usuario
-      FROM ocorrencia o
-      JOIN aluno a ON o.fk_id_aluno = a.id_aluno
-      JOIN usuario u ON o.fk_id_usuario = u.id_usuario
-      ORDER BY data_ocorrencia DESC
-    `;
+    const query = `SELECT * FROM ocorrencia`;
 
     connect.query(query, (err, results) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ error: "Erro interno do servidor" });
       }
-      return res.status(200).json({ ocorrencias: results });
+      return res.status(200).json(results);
     });
   }
 
@@ -114,7 +108,7 @@ module.exports = class ocorrenciaController {
   static async deleteOcorrencia(req, res) {
     const id_ocorrencia = req.params.id_ocorrencia;
 
-    const query = "DELETE FROM ocorrencia WHERE id_ocorrencia = ?";
+    const query = `DELETE FROM ocorrencia WHERE id_ocorrencia = ?`;
 
     connect.query(query, [id_ocorrencia], (err, results) => {
       if (err) {

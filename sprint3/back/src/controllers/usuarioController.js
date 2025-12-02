@@ -131,24 +131,36 @@ module.exports = class usuarioController {
   static async deleteUser(req, res) {
     const id_usuario = req.params.id_usuario;
 
-    const query = `DELETE FROM usuario WHERE id_usuario = ?`;
-    const values = [id_usuario];
+    // Query 1: Remove as ocorrências que este usuário criou
+    const queryLimparOcorrencias = `DELETE FROM ocorrencia WHERE fk_id_usuario = ?`;
+    
+    // Query 2: Remove o usuário (agora que ele não tem mais amarras)
+    const queryDeletarUsuario = `DELETE FROM usuario WHERE id_usuario = ?`;
 
     try {
-      connect.query(query, values, (err, results) => {
+      // PASSO 1: Tenta limpar as ocorrências
+      connect.query(queryLimparOcorrencias, [id_usuario], (err) => {
         if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Erro interno do servidor" });
+          console.error("Erro ao limpar ocorrências:", err);
+          return res.status(500).json({ error: "Erro ao preparar exclusão do usuário" });
         }
 
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Usuário não encontrado" });
-        }
+        // PASSO 2: Se limpou (ou não tinha nada), apaga o usuário
+        connect.query(queryDeletarUsuario, [id_usuario], (err, results) => {
+          if (err) {
+            console.error("Erro ao deletar usuário:", err);
+            return res.status(500).json({ error: "Erro interno ao excluir usuário" });
+          }
 
-        return res.status(200).json({ message: "Usuário excluído com sucesso" });
+          if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+          }
+
+          return res.status(200).json({ message: "Usuário e seu histórico excluídos com sucesso" });
+        });
       });
     } catch (error) {
-      console.error("Erro ao executar consulta:", error);
+      console.error("Erro no controller:", error);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   }

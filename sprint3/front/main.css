@@ -1,6 +1,4 @@
-/* =========================================
-   1. RESET E CONFIGURAÇÕES GERAIS
-   ========================================= */
+/* 1. RESET E CONFIGURAÇÕES GERAIS */
 * {
     margin: 0;
     padding: 0;
@@ -18,9 +16,7 @@ body {
     align-items: center;
 }
 
-/* =========================================
-   2. ESTILO DOS CARTÕES (LOGIN, CADASTROS, FORMS)
-   ========================================= */
+/* 2. ESTILO DOS CARTÕES (LOGIN, CADASTROS, FORMS) */
 .card-box {
     background-color: #D9D9D9; /* Cinza do protótipo */
     color: #000;
@@ -89,10 +85,7 @@ button {
     text-decoration: underline;
 }
 
-/* =========================================
-   3. ESTILOS DA HOME (DASHBOARD)
-   ========================================= */
-
+/* 3. ESTILOS DA HOME (DASHBOARD) */
 /* Container Principal (Janela do Dashboard) */
 .dashboard-container {
     width: 95%;
@@ -231,10 +224,7 @@ button {
     font-size: 16px;
 }
 
-/* =========================================
-   4. ESTILOS DA LISTA DE OCORRÊNCIAS
-   ========================================= */
-
+/* 4. ESTILOS DA LISTA DE OCORRÊNCIAS */
 /* Container específico da lista */
 .lista-container {
     width: 90%;
@@ -349,9 +339,7 @@ button {
     padding: 5px;
 }
 
-/* =========================================
-   5. RODAPÉ FIXO (FOOTER)
-   ========================================= */
+/* 5. RODAPÉ FIXO (FOOTER) */
 .footer-padrao {
     position: fixed;
     bottom: 0;
